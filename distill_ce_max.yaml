@@ -1,5 +1,5 @@
 ### model
-model_name_or_path: /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/models/models--Qwen--Qwen3-4B-Instruct-2507\snapshots\cdbee75f17c01a7cc42f958dc650907174af0554 #Qwen/Qwen3-4B-Instruct-2507
+model_name_or_path: /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/models/models--Qwen--Qwen3-4B-Instruct-2507/snapshots/cdbee75f17c01a7cc42f958dc650907174af0554 #Qwen/Qwen3-4B-Instruct-2507
 trust_remote_code: true
 flash_attn: fa2
 
@@ -15,7 +15,7 @@ template: qwen3_nothink
 cutoff_len: 8192
 
 ### output
-output_dir: saves/qwen3-4b/distill_ce_min
+output_dir: saves/qwen3-4b/distill_ce_max
 logging_steps: 1
 save_steps: 150
 plot_loss: true

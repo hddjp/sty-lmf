@@ -193,12 +193,11 @@ def main():
     
     all_datasets = ['gsm8k', 'MATH','AIME24', 'AIME25', 'MMLU', 'BBH']
     #all_datasets = ['gsm8k', 'MATH','AIME24', 'AIME25']
-    #all_datasets = ['MMLU']
     all_acc = {}
     
     for ds in all_datasets:
         print(f"Dataset: {ds}")
-        dataset = EvalDataset(os.path.join("/data/sty/onff/dataset/test", ds + ".jsonl"))
+        dataset = EvalDataset(os.path.join("/mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/dataset/test", ds + ".jsonl"))
         
         results, accuracy = evaluate_model(model_path, dataset,ds)
         all_acc[ds] = accuracy
