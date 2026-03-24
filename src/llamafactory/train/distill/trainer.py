@@ -26,7 +26,7 @@ import torch
 from transformers import Seq2SeqTrainer
 from typing_extensions import override
 import deepspeed
-
+import random
 
 #from ...extras import logging
 import logging
@@ -49,12 +49,12 @@ logger = logging.getLogger(__name__)
 logger.handlers.clear()
 logger.setLevel(logging.DEBUG)
 
-#file_handler = logging.FileHandler(
-#    filename="/data/sty/LLaMA-Factory/log.txt",  
-#    mode="a",                   
-#    encoding="utf-8"             
-#)
-#logger.addHandler(file_handler)
+file_handler = logging.FileHandler(
+    filename="/data/sty/LLaMA-Factory/log.txt",  
+    mode="a",                   
+    encoding="utf-8"             
+)
+logger.addHandler(file_handler)
 
 def padding_sequence(batch_samples):
     max_len = max([s["input_ids"].shape[1] for s in batch_samples])
@@ -209,42 +209,46 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
                     "labels": combined_label.unsqueeze(0),
                     "attention_mask": combined_attn.unsqueeze(0)
                 })
-            with torch.no_grad():
-                loss_list=[]
-                if "ce" in self.select_type:
-                    for sample in split_samples:
+            if "random" in self.select_type:
+                selected_sample = random.sample(split_samples,1)[0]
+            else:     
+                with torch.no_grad():
+                    loss_list=[]
+                    if "ce" in self.select_type:
+                        for sample in split_samples:
+                            outputs = model(**sample)
+                            loss = outputs.loss.item()
+                            loss_list.append(loss)
+                    elif "kl" in self.select_type:
+                        sample = padding_sequence(split_samples)
+                        #logger.debug(os.environ.get("RANK")+"-------padding"+str(sample["input_ids"].shape))
                         outputs = model(**sample)
-                        loss = outputs.loss.item()
-                        loss_list.append(loss)
-                else:
-                    sample = padding_sequence(split_samples)
-                    #logger.debug(os.environ.get("RANK")+"-------padding"+str(sample["input_ids"].shape))
-                    outputs = model(**sample)
-                    teacher_outputs = self.teacher_model(**sample)
-                    teacher_logits = teacher_outputs.logits
-                    teacher_probs = torch.nn.functional.softmax(teacher_logits, dim=-1)
-                    student_log_probs = torch.nn.functional.log_softmax(outputs.logits, dim=-1)
-                    kl_div =  torch.nn.functional.kl_div( 
-                        student_log_probs,
-                        teacher_probs, 
-                        reduction="none"  
-                    )
-                    mask = (sample["labels"] != -100).unsqueeze(-1).to(kl_div.device)
-                    kl_div_masked = kl_div * mask
-                    loss = kl_div_masked.sum(-1).mean(-1)
-                    #logger.debug(os.environ.get("RANK")+"-------"+str(loss.shape))
-                    loss_list = loss.tolist()
-                    #logger.debug(loss_list)
-                    #logger.debug(os.environ.get("RANK")+"-------"+str(len(loss_list)))
-                 
-                if "max" in self.select_type:
-                    selected_val = max(loss_list)
-                else:
-                    selected_val = max(loss_list)
-                selected_idx = loss_list.index(selected_val)  
-                selected_sample = split_samples[selected_idx]
-                
-                batch_samples.append(selected_sample)
+                        teacher_outputs = self.teacher_model(**sample)
+                        teacher_logits = teacher_outputs.logits
+                        teacher_probs = torch.nn.functional.softmax(teacher_logits, dim=-1)
+                        student_log_probs = torch.nn.functional.log_softmax(outputs.logits, dim=-1)
+                        kl_div =  torch.nn.functional.kl_div( 
+                            student_log_probs,
+                            teacher_probs, 
+                            reduction="none"  
+                        )
+                        mask = (sample["labels"] != -100).unsqueeze(-1).to(kl_div.device)
+                        kl_div_masked = kl_div * mask
+                        loss = kl_div_masked.sum(-1).mean(-1)
+                        #logger.debug(os.environ.get("RANK")+"-------"+str(loss.shape))
+                        loss_list = loss.tolist()
+                        logger.debug(loss_list)
+                        #logger.debug(os.environ.get("RANK")+"-------"+str(len(loss_list)))
+                    
+                    
+                    if "max" in self.select_type:
+                        selected_val = max(loss_list)
+                    else:
+                        selected_val = min(loss_list)
+                    selected_idx = loss_list.index(selected_val)  
+                    selected_sample = split_samples[selected_idx]
+                    
+            batch_samples.append(selected_sample)
 
         torch.cuda.empty_cache()
         final_batch = padding_sequence(batch_samples)
