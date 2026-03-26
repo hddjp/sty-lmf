@@ -19,7 +19,7 @@ rjob submit --gpu=8 --memory=1000000 -P 1 --cpu=128 --priority 8 --name=distill_
   export OMP_NUM_THREADS=8
 
   python -m llamafactory.cli train /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/distill_kl_min.yaml
-  rm -r /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/saves/qwen3-4b/distill_kl_max/checkpoint-*/global_step*
+  rm -r /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/saves/qwen3-4b/distill_kl_min/checkpoint-*/global_step*
 "
 
 rjob submit --gpu=8 --memory=1000000 -P 1 --cpu=128 --priority 8 --name=distill_max_kl \
