@@ -237,9 +237,9 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
                         loss = kl_div_masked.sum(-1).mean(-1)
                         #logger.debug(os.environ.get("RANK")+"-------"+str(loss.shape))
                         loss_list = loss.tolist()
-                        logger.debug(loss_list)
+                        #logger.debug(loss_list)
                         #logger.debug(os.environ.get("RANK")+"-------"+str(len(loss_list)))
-                    
+                        torch.cuda.empty_cache()
                     
                     if "max" in self.select_type:
                         selected_val = max(loss_list)

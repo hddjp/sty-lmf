@@ -12,7 +12,7 @@ finetuning_type: full
 ### dataset
 dataset: gsm8kall,MATHall
 template: qwen3_nothink
-cutoff_len: 8192
+cutoff_len: 40000
 
 ### output
 output_dir: saves/qwen3-4b/distill_ce_max
