@@ -214,32 +214,29 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
             else:     
                 with torch.no_grad():
                     loss_list=[]
-                    if "ce" in self.select_type:
-                        for sample in split_samples:
+                    for sample in split_samples:
+                        if "ce" in self.select_type:
                             outputs = model(**sample)
                             loss = outputs.loss.item()
-                            loss_list.append(loss)
-                    elif "kl" in self.select_type:
-                        sample = padding_sequence(split_samples)
-                        #logger.debug(os.environ.get("RANK")+"-------padding"+str(sample["input_ids"].shape))
-                        outputs = model(**sample)
-                        teacher_outputs = self.teacher_model(**sample)
-                        teacher_logits = teacher_outputs.logits
-                        teacher_probs = torch.nn.functional.softmax(teacher_logits, dim=-1)
-                        student_log_probs = torch.nn.functional.log_softmax(outputs.logits, dim=-1)
-                        kl_div =  torch.nn.functional.kl_div( 
-                            student_log_probs,
-                            teacher_probs, 
-                            reduction="none"  
-                        )
-                        mask = (sample["labels"] != -100).unsqueeze(-1).to(kl_div.device)
-                        kl_div_masked = kl_div * mask
-                        loss = kl_div_masked.sum(-1).mean(-1)
-                        #logger.debug(os.environ.get("RANK")+"-------"+str(loss.shape))
-                        loss_list = loss.tolist()
-                        #logger.debug(loss_list)
-                        #logger.debug(os.environ.get("RANK")+"-------"+str(len(loss_list)))
-                        torch.cuda.empty_cache()
+    
+                        elif "kl" in self.select_type:
+                            outputs = model(**sample)
+                            teacher_outputs = self.teacher_model(**sample)
+                            teacher_logits = teacher_outputs.logits
+                            teacher_probs = torch.nn.functional.softmax(teacher_logits, dim=-1)
+                            student_log_probs = torch.nn.functional.log_softmax(outputs.logits, dim=-1)
+                                                        
+                            kl_div =  torch.nn.functional.kl_div( 
+                                student_log_probs,
+                                teacher_probs, 
+                                reduction="none"  
+                            )
+                            mask = (sample["labels"] != -100).unsqueeze(-1).to(kl_div.device)
+                            
+                            kl_div_masked = kl_div * mask
+                            loss = kl_div_masked.sum(-1).mean(-1).item()
+                            
+                        loss_list.append(loss)
                     
                     if "max" in self.select_type:
                         selected_val = max(loss_list)
