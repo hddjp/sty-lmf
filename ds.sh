@@ -1,4 +1,4 @@
-rjob submit --gpu=8 --memory=1000000 -P 1 --cpu=128 --priority 8 --name=distill_min_kl \
+rjob submit --gpu=8 --memory=1000000 -P 1 --cpu=128 --priority 8 --name=sft_min_kl \
 --host-network=true \
 -e DISTRIBUTED_JOB=true \
 --charged-group=protfma_gpu --private-machine=group \
@@ -18,11 +18,11 @@ rjob submit --gpu=8 --memory=1000000 -P 1 --cpu=128 --priority 8 --name=distill_
   export HF_HUB_OFFLINE=1
   export OMP_NUM_THREADS=8
 
-  python -m llamafactory.cli train /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/distill_kl_min.yaml
-  rm -r /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/saves/qwen3-4b/distill_kl_min/checkpoint-*/global_step*
+  python -m llamafactory.cli train /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/sft_kl_min.yaml
+  rm -r /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/saves/qwen3-4b/sft_kl_min/checkpoint-*/global_step*
 "
 
-rjob submit --gpu=8 --memory=1000000 -P 1 --cpu=128 --priority 8 --name=distill_max_kl \
+rjob submit --gpu=8 --memory=1000000 -P 1 --cpu=128 --priority 8 --name=sft_max_kl \
 --host-network=true \
 -e DISTRIBUTED_JOB=true \
 --charged-group=protfma_gpu --private-machine=group \
@@ -42,11 +42,11 @@ rjob submit --gpu=8 --memory=1000000 -P 1 --cpu=128 --priority 8 --name=distill_
   export HF_HUB_OFFLINE=1
   export OMP_NUM_THREADS=8
 
-  python -m llamafactory.cli train /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/distill_kl_max.yaml
-  rm -r /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/saves/qwen3-4b/distill_kl_max/checkpoint-*/global_step*
+  python -m llamafactory.cli train /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/sft_kl_max.yaml
+  rm -r /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/saves/qwen3-4b/sft_kl_max/checkpoint-*/global_step*
 "
 
-rjob submit --gpu=8 --memory=1000000 -P 1 --cpu=128 --priority 8 --name=distill_min_ce \
+rjob submit --gpu=8 --memory=1000000 -P 1 --cpu=128 --priority 8 --name=sft_min_ce \
 --host-network=true \
 -e DISTRIBUTED_JOB=true \
 --charged-group=protfma_gpu --private-machine=group \
@@ -66,11 +66,11 @@ rjob submit --gpu=8 --memory=1000000 -P 1 --cpu=128 --priority 8 --name=distill_
   export HF_HUB_OFFLINE=1
   export OMP_NUM_THREADS=8
 
-  python -m llamafactory.cli train /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/distill_ce_min.yaml
-  rm -r /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/saves/qwen3-4b/distill_ce_min/checkpoint-*/global_step*
+  python -m llamafactory.cli train /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/sft_ce_min.yaml
+  rm -r /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/saves/qwen3-4b/sft_ce_min/checkpoint-*/global_step*
 "
 
-rjob submit --gpu=8 --memory=1000000 -P 1 --cpu=128 --priority 8 --name=distill_max_ce \
+rjob submit --gpu=8 --memory=1000000 -P 1 --cpu=128 --priority 8 --name=sft_max_ce \
 --host-network=true \
 -e DISTRIBUTED_JOB=true \
 --charged-group=protfma_gpu --private-machine=group \
@@ -90,6 +90,6 @@ rjob submit --gpu=8 --memory=1000000 -P 1 --cpu=128 --priority 8 --name=distill_
   export HF_HUB_OFFLINE=1
   export OMP_NUM_THREADS=8
 
-  python -m llamafactory.cli train /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/distill_ce_max.yaml
-  rm -r /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/saves/qwen3-4b/distill_ce_max/checkpoint-*/global_step*
+  python -m llamafactory.cli train /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/sft_ce_max.yaml
+  rm -r /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/saves/qwen3-4b/sft_ce_max/checkpoint-*/global_step*
 "
