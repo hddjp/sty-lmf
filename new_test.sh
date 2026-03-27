@@ -53,6 +53,7 @@ for MODELNAME in "${MODEL_NAMES[@]}"; do
 
         # 1. 启动 SGLang 服务（后台运行，并记录进程ID）
         echo "=== 启动 SGLang 服务 ==="
+        mkdir -p testlog
         $SERVER_CMD > testlog/sglang_server_${MODELNAME}_epoch${EPOCH}.log 2>&1 &
         SERVER_PID=$!
         echo "SGLang 服务已启动，进程ID: $SERVER_PID，日志文件: sglang_server_${MODELNAME}_epoch${EPOCH}.log"
