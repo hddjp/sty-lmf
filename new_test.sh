@@ -3,13 +3,17 @@
 # ======================== 批量配置（仅需修改这里） ========================
 # 外层循环：需要执行的模型名称列表（根据你的实际模型名修改）
 MODEL_NAMES=(
-    "sft_ce_min"
-    "sft_kl_max"
-    "sft_kl_min"
+    "sft_random"
+    
 )
 
 # 内层循环：每个模型需要执行的epoch列表（根据你的实际epoch修改）
 EPOCHS=(
+    "checkpoint-150"
+    "checkpoint-300"
+    "checkpoint-450"
+    "checkpoint-600"
+    "checkpoint-750"
     "checkpoint-855"
 )
 
