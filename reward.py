@@ -107,8 +107,8 @@ def fix_fracs(string):
                             new_str += "{" + a + "}" + b
         return new_str
     except Exception:
-        with open("/data/sty/onff/testfile/log.txt","a") as f:
-            f.write(string)
+        #with open("/data/sty/onff/testfile/log.txt","a") as f:
+        #    f.write(string)
         return string
 
 
@@ -152,8 +152,8 @@ def fix_sqrt(string):
                 new_substr = "\\sqrt" + split
             new_string += new_substr
     except Exception as e:
-        with open("/data/sty/onff/testfile/log.txt","a") as f:
-            f.write(string)
+        #with open("/data/sty/onff/testfile/log.txt","a") as f:
+        #    f.write(string)
         return string
     return new_string
 

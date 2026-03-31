@@ -3,20 +3,14 @@
 # ======================== 批量配置（仅需修改这里） ========================
 # 外层循环：需要执行的模型名称列表（根据你的实际模型名修改）
 MODEL_NAMES=(
-    "distill_ce_min"
-    "distill_ce_max"
-    "distill_kl_max"
-    "distill_kl_min"
+    "sft_ce_min"
+    "sft_kl_max"
+    "sft_kl_min"
 )
 
 # 内层循环：每个模型需要执行的epoch列表（根据你的实际epoch修改）
 EPOCHS=(
-    "checkpoint-150"
-    "checkpoint-300"
-    "checkpoint-450"
-    "checkpoint-600"
-    "checkpoint-750"
-    "checkpoint-900"
+    "checkpoint-855"
 )
 
 # ======================== 两层循环执行原有逻辑 ========================
@@ -46,7 +40,7 @@ for MODELNAME in "${MODEL_NAMES[@]}"; do
         --schedule-conservativeness 0.3 \
         --cuda-graph-max-bs 768 \
         --chunked-prefill-size 4096 \
-        --dp 4"
+        --dp 8"
 
         # 定义你要运行的 Python 文件路径（请替换成实际路径）
         PYTHON_SCRIPT="/mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/sglang_inference.py"
