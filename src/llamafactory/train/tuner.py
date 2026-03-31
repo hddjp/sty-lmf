@@ -60,7 +60,7 @@ def _training_function(config: dict[str, Any]) -> None:
     callbacks: list[Any] = config.get("callbacks")
     teacher_name = args.pop("teacher_name")
     select_type = args.pop("select_type")
-    train_type = args.pop("train_type")
+    train_alpha = args.pop("train_alpha")
     
     model_args, data_args, training_args, finetuning_args, generating_args = get_train_args(args)
 
@@ -105,7 +105,7 @@ def _training_function(config: dict[str, Any]) -> None:
     elif finetuning_args.stage == "kto":
         run_kto(model_args, data_args, training_args, finetuning_args, callbacks)
     elif finetuning_args.stage == "distill":
-        run_distill(teacher_name,select_type,train_type,model_args, data_args, training_args, finetuning_args, generating_args ,callbacks)
+        run_distill(teacher_name,select_type,train_alpha,model_args, data_args, training_args, finetuning_args, generating_args ,callbacks)
     else:
         raise ValueError(f"Unknown task: {finetuning_args.stage}.")
 

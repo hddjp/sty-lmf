@@ -95,7 +95,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         self,
         teacher_name,
         select_type,
-        train_type,
+        train_alpha,
         finetuning_args: "FinetuningArguments",
         processor: Optional["ProcessorMixin"],
         model_args: Optional["ModelArguments"] = None,
@@ -149,7 +149,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         self.teacher_model = AutoModelForCausalLM.from_pretrained(teacher_name,torch_dtype=torch.bfloat16).to(f"cuda:{os.environ.get('RANK')}")
         self.teacher_model.eval()
         self.select_type = select_type
-        self.train_type = train_type
+        self.train_alpha = train_alpha
         #self.teacher_model = prepare_deepspeed(self.teacher_model,1)
         #self.teacher_model = deepspeed.init_inference(model=self.teacher_model)
 
@@ -283,7 +283,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         
         outputs = model(**selected_inputs)
         
-        if self.train_type == "distill":            
+        if train_alpha > 0:            
             with torch.no_grad():
                 #logger.info(self.teacher_model.device)
                 teacher_outputs = self.teacher_model(**selected_inputs)
@@ -302,9 +302,12 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
             #logger.debug(os.environ.get("RANK")+"-------mask"+str(mask.shape))
             kl_div_masked = kl_div * mask
             
-            loss = kl_div_masked.sum(-1).mean() 
-            #logger.debug(f"GPU {os.environ.get('RANK')}: {torch.cuda.memory_allocated(int(os.environ.get('RANK')))/1024**2:.2f} MB")
-            #loss = self.label_smoother(outputs, labels, shift_labels=True)
+            loss1 = kl_div_masked.sum(-1).mean()
+        
+        #logger.debug(f"GPU {os.environ.get('RANK')}: {torch.cuda.memory_allocated(int(os.environ.get('RANK')))/1024**2:.2f} MB")
+        #loss = self.label_smoother(outputs, labels, shift_labels=True)
+            loss2 =  outputs.loss
+            loss = self.train_alpha * loss1 + (1-self.train_alpha) * loss2
         else:
             loss =  outputs.loss
         

@@ -41,7 +41,7 @@ logger = get_logger(__name__)
 def run_distill(
     teacher_name,
     select_type,
-    train_type,
+    train_alpha,
     model_args: "ModelArguments",
     data_args: "DataArguments",
     training_args: "Seq2SeqTrainingArguments",
@@ -105,7 +105,7 @@ def run_distill(
     trainer = CustomSeq2SeqTrainer(
         teacher_name=teacher_name,
         select_type=select_type,
-        train_type=train_type,
+        train_alpha=train_alpha,
         model=model,
         args=training_args,
         finetuning_args=finetuning_args,
