@@ -283,9 +283,8 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         
         outputs = model(**selected_inputs)
         
-        if train_alpha > 0:            
+        if self.train_alpha > 0:            
             with torch.no_grad():
-                #logger.info(self.teacher_model.device)
                 teacher_outputs = self.teacher_model(**selected_inputs)
                 teacher_logits = teacher_outputs.logits
                 teacher_probs = torch.nn.functional.softmax(teacher_logits, dim=-1)
@@ -299,13 +298,10 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
             )
             
             mask = (selected_inputs["labels"] != -100).unsqueeze(-1).to(kl_div.device)
-            #logger.debug(os.environ.get("RANK")+"-------mask"+str(mask.shape))
             kl_div_masked = kl_div * mask
             
             loss1 = kl_div_masked.sum(-1).mean()
         
-        #logger.debug(f"GPU {os.environ.get('RANK')}: {torch.cuda.memory_allocated(int(os.environ.get('RANK')))/1024**2:.2f} MB")
-        #loss = self.label_smoother(outputs, labels, shift_labels=True)
             loss2 =  outputs.loss
             loss = self.train_alpha * loss1 + (1-self.train_alpha) * loss2
         else:
