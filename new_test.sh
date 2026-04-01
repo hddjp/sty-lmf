@@ -33,8 +33,8 @@ for MODELNAME in "${MODEL_NAMES[@]}"; do
 
         # 定义 SGLang 服务的启动命令
         SERVER_CMD="python -m sglang.launch_server \
-        --model-path /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/saves/qwen3-4b/${MODELNAME}/${EPOCH} \
-        --tokenizer-path /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/saves/qwen3-4b/${MODELNAME}/${EPOCH} \
+        --model-path /data/sty/sty-lmf/saves/qwen3-4b/${MODELNAME}/${EPOCH} \
+        --tokenizer-path /data/sty/sty-lmf/saves/qwen3-4b/${MODELNAME}/${EPOCH} \
         --dtype bfloat16 \
         --port 30000 \
         --host 0.0.0.0 \
@@ -47,7 +47,7 @@ for MODELNAME in "${MODEL_NAMES[@]}"; do
         --dp 8"
 
         # 定义你要运行的 Python 文件路径（请替换成实际路径）
-        PYTHON_SCRIPT="/mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/sglang_inference.py"
+        PYTHON_SCRIPT="/data/sty/sty-lmf/sglang_inference.py"
 
         # 1. 启动 SGLang 服务（后台运行，并记录进程ID）
         echo "=== 启动 SGLang 服务 ==="

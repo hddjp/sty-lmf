@@ -183,11 +183,11 @@ def main():
     model_name = args.modelname
     
     eval_model = f"{model_name}_{epoch}"
-    save_path = os.path.join("/mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/saves/qwen3-4b/eval_result/", eval_model)
+    save_path = os.path.join("/data/sty/sty-lmf/saves/qwen3-4b/eval_result/", eval_model)
     save_mode = True
     
     #model_path = f"/data/sty/onff/model/{model_name}/epoch_{epoch}"
-    model_path = f"/mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/saves/qwen3-4b/${model_name}/${epoch}"
+    model_path = f"/data/sty/sty-lmf/saves/qwen3-4b/${model_name}/${epoch}"
     #save_path = os.path.join("/data/sty/onff/eval_result/", "lmfsft1")
     os.makedirs(save_path, exist_ok=True)
     
@@ -197,7 +197,7 @@ def main():
     
     for ds in all_datasets:
         print(f"Dataset: {ds}")
-        dataset = EvalDataset(os.path.join("/mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/dataset/test", ds + ".jsonl"))
+        dataset = EvalDataset(os.path.join("/data/sty/sty-lmf/dataset/test", ds + ".jsonl"))
         
         results, accuracy = evaluate_model(model_path, dataset,ds)
         all_acc[ds] = accuracy

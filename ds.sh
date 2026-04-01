@@ -10,7 +10,7 @@ rjob submit --gpu=8 --memory=1000000 -P 1 --cpu=128 --priority 8 --name=sft_rand
   CONDA_PATH=/mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/miniconda3
   . \${CONDA_PATH}/etc/profile.d/conda.sh && conda init && conda activate ssttyy
 
-  cd /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf
+  cd /data/sty/sty-lmf
   export NCCL_TIMEOUT=18000
   export NCCL_DEBUG=INFO
   export HF_DATASETS_CACHE=/mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/data/dataset_cache
@@ -18,7 +18,7 @@ rjob submit --gpu=8 --memory=1000000 -P 1 --cpu=128 --priority 8 --name=sft_rand
   export HF_HUB_OFFLINE=1
   export OMP_NUM_THREADS=8
 
-  python -m llamafactory.cli train /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/train_scripts/sft_random.yaml
-  sudo chmod -R 777 /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/saves
-  rm -r /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/saves/qwen3-4b/sft_random/checkpoint-*/global_step*
+  python -m llamafactory.cli train /data/sty/sty-lmf/train_scripts/sft_random.yaml
+  sudo chmod -R 777 /data/sty/sty-lmf/saves
+  rm -r /data/sty/sty-lmf/saves/qwen3-4b/sft_random/checkpoint-*/global_step*
 "
