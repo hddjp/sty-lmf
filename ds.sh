@@ -19,5 +19,6 @@ rjob submit --gpu=8 --memory=1000000 -P 1 --cpu=128 --priority 8 --name=sft_rand
   export OMP_NUM_THREADS=8
 
   python -m llamafactory.cli train /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/train_scripts/sft_random.yaml
+  sudo chmod -R 777 /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/saves
   rm -r /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/code/sty-lmf/saves/qwen3-4b/sft_random/checkpoint-*/global_step*
 "

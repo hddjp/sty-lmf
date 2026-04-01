@@ -315,7 +315,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
             #logger.debug(self.accelerator.num_processes)
         
         torch.cuda.empty_cache()
-        return loss
+        return (loss, outputs) if return_outputs else loss
         
     @override
     def prediction_step(
