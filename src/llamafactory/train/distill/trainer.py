@@ -273,7 +273,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         return super()._get_train_sampler(*args, **kwargs)
 
     @override
-    def compute_loss(self, model, inputs, *args, **kwargs):
+    def compute_loss(self, model, inputs,return_outputs: bool = False, ,*args, **kwargs):
         
         selected_inputs = self.select_sample(inputs,model)
         #logger.debug(f"GPU {os.environ.get('RANK')}: {torch.cuda.memory_allocated(int(os.environ.get('RANK')))/1024**2:.2f} MB")

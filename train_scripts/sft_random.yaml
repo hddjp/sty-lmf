@@ -37,6 +37,7 @@ val_size: 0.05
 eval_strategy: steps
 eval_steps: 50
 do_eval: true
+per_device_eval_batch_size: 1
 
 deepspeed: examples/deepspeed/ds_z2_offload_config.json
 
