@@ -1,0 +1,46 @@
+### model
+model_name_or_path: /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/models/models--Qwen--Qwen3-4B-Instruct-2507/snapshots/cdbee75f17c01a7cc42f958dc650907174af0554 #Qwen/Qwen3-4B-Instruct-2507
+trust_remote_code: true
+flash_attn: fa2
+
+### method
+stage: distill
+do_train: true
+finetuning_type: full
+
+
+### dataset
+dataset: gsm8kall,MATHall
+template: qwen3_nothink
+cutoff_len: 40000
+
+### output
+output_dir: saves/qwen3-4b/distill_random
+logging_steps: 1
+save_steps: 150
+plot_loss: true
+save_only_model: false
+report_to: wandb  # choices: [none, wandb, tensorboard, swanlab, mlflow]
+
+### train
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 8
+learning_rate: 5e-6
+num_train_epochs: 3.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+resume_from_checkpoint: null
+overwrite_output_dir: true
+
+val_size: 0.05
+eval_strategy: steps
+eval_steps: 50
+do_eval: true
+per_device_eval_batch_size: 1
+
+deepspeed: examples/deepspeed/ds_z2_offload_config.json
+
+teacher_name: /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/models/models--Qwen--Qwen3-30B-A3B-Instruct-2507/snapshots/0d7cf23991f47feeb3a57ecb4c9cee8ea4a17bfe #Qwen/Qwen3-4B-Instruct-2507 #Qwen/Qwen3-0.6B #Qwen/Qwen3-30B-A3B-Instruct-2507
+select_type: random
+train_alpha: 1
