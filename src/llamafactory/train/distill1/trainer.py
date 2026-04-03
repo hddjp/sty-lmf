@@ -49,12 +49,12 @@ logger = logging.getLogger(__name__)
 logger.handlers.clear()
 logger.setLevel(logging.DEBUG)
 
-#file_handler = logging.FileHandler(
-#    filename="/data/sty/LLaMA-Factory/log.txt",  
-#    mode="a",                   
-#    encoding="utf-8"             
-#)
-#logger.addHandler(file_handler)
+file_handler = logging.FileHandler(
+    filename="/data/sty/sty-lmf/log.txt",  
+    mode="a",                   
+    encoding="utf-8"             
+)
+logger.addHandler(file_handler)
 
 def padding_sequence(batch_samples):
     max_len = max([s["input_ids"].shape[1] for s in batch_samples])
