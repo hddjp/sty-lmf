@@ -14,7 +14,7 @@ EPOCHS=(
     "checkpoint-450"
     "checkpoint-600"
     "checkpoint-750"
-    "checkpoint-855"
+    "checkpoint-810"
 )
 
 # ======================== 两层循环执行原有逻辑 ========================

@@ -15,7 +15,7 @@ template: qwen3_nothink
 cutoff_len: 40000
 
 ### output
-output_dir: saves/qwen3-4b/distill_kl_min
+output_dir: saves/qwen3-4b/distill_random
 logging_steps: 1
 save_steps: 150
 plot_loss: true
