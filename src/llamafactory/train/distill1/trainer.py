@@ -146,10 +146,17 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         if training_args.fp8 and hasattr(self, "accelerator"):  # verify FP8 status after trainer initialization
             verify_fp8_status(self.accelerator, training_args)
 
-        self.teacher_model = AutoModelForCausalLM.from_pretrained(teacher_name,torch_dtype=torch.bfloat16).to(f"cuda:{os.environ.get('RANK')}")
-        self.teacher_model.eval()
+        
         self.select_type = select_type
         self.train_alpha = train_alpha
+        
+        if self.train_alpha > 0 or "kl" in self.select_type:
+            
+            self.teacher_model = AutoModelForCausalLM.from_pretrained(teacher_name,torch_dtype=torch.bfloat16,device_map="cuda:1")
+            #for name, module in self.teacher_model.named_modules():
+            #    logger.debug(name)
+            self.teacher_model.eval()
+            
         #self.teacher_model = prepare_deepspeed(self.teacher_model,1)
         #self.teacher_model = deepspeed.init_inference(model=self.teacher_model)
 
@@ -221,8 +228,9 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
     
                         elif "kl" in self.select_type:
                             outputs = model(**sample)
-                            teacher_outputs = self.teacher_model(**sample)
-                            teacher_logits = teacher_outputs.logits
+                            #teacher_outputs = self.teacher_model(**sample)
+                            teacher_outputs = self.teacher_model(**{k: v.to(self.teacher_model.device) for k, v in sample.items()})
+                            teacher_logits = teacher_outputs.logits.to(model.device)
                             teacher_probs = torch.nn.functional.softmax(teacher_logits, dim=-1)
                             student_log_probs = torch.nn.functional.log_softmax(outputs.logits, dim=-1)
                                                         
@@ -234,7 +242,8 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
                             mask = (sample["labels"] != -100).unsqueeze(-1).to(kl_div.device)
                             
                             kl_div_masked = kl_div * mask
-                            loss = kl_div_masked.sum(-1).mean(-1).item()
+                            num_valid_tokens = mask.sum()
+                            loss = kl_div_masked.sum() / num_valid_tokens
                             
                         loss_list.append(loss)
                     
@@ -285,8 +294,9 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         
         if self.train_alpha > 0:            
             with torch.no_grad():
-                teacher_outputs = self.teacher_model(**selected_inputs)
-                teacher_logits = teacher_outputs.logits
+                #teacher_outputs = self.teacher_model(**selected_inputs)
+                teacher_outputs = self.teacher_model(**{k: v.to(self.teacher_model.device) for k, v in selected_inputs.items()})
+                teacher_logits = teacher_outputs.logits.to(model.device)
                 teacher_probs = torch.nn.functional.softmax(teacher_logits, dim=-1)
                 
             student_log_probs = torch.nn.functional.log_softmax(outputs.logits, dim=-1)
@@ -300,18 +310,20 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
             mask = (selected_inputs["labels"] != -100).unsqueeze(-1).to(kl_div.device)
             kl_div_masked = kl_div * mask
             
-            loss1 = kl_div_masked.sum(-1).mean()
+            num_valid_tokens = mask.sum()
+            loss1 = kl_div_masked.sum() / num_valid_tokens
         
             loss2 =  outputs.loss
+            logger.debug(f"loss1: {loss1} ----- loss2: {loss2} ----- {num_valid_tokens} ----- {mask.shape}")
             loss = self.train_alpha * loss1 + (1-self.train_alpha) * loss2
         else:
             loss =  outputs.loss
         
-        if (
-            self.args.average_tokens_across_devices
-            and (self.model_accepts_loss_kwargs or self.compute_loss_func)
-        ):
-            loss *= self.accelerator.num_processes if self.args.n_gpu <= 1 else self.args.n_gpu
+        #if (
+        #    self.args.average_tokens_across_devices
+        #    and (self.model_accepts_loss_kwargs or self.compute_loss_func)
+        #):
+        #    loss *= self.accelerator.num_processes if self.args.n_gpu <= 1 else self.args.n_gpu
             #logger.debug(self.accelerator.num_processes)
         
         torch.cuda.empty_cache()

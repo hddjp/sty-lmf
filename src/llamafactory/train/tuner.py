@@ -35,6 +35,7 @@ from .pt import run_pt
 from .rm import run_rm
 from .sft import run_sft
 from .distill import run_distill
+from .distill1 import run_distill1
 from .trainer_utils import (
     get_placement_group,
     get_ray_head_node_ip,
@@ -107,7 +108,7 @@ def _training_function(config: dict[str, Any]) -> None:
     elif finetuning_args.stage == "distill":
         run_distill(teacher_name,select_type,train_alpha,model_args, data_args, training_args, finetuning_args, generating_args ,callbacks)
     elif finetuning_args.stage == "distill1":
-        run_distill(teacher_name,select_type,train_alpha,model_args, data_args, training_args, finetuning_args, generating_args ,callbacks)
+        run_distill1(teacher_name,select_type,train_alpha,model_args, data_args, training_args, finetuning_args, generating_args ,callbacks)
     else:
         raise ValueError(f"Unknown task: {finetuning_args.stage}.")
 

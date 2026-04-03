@@ -24,8 +24,8 @@ report_to: wandb  # choices: [none, wandb, tensorboard, swanlab, mlflow]
 
 ### train
 per_device_train_batch_size: 1
-gradient_accumulation_steps: 8
-learning_rate: 5e-7
+gradient_accumulation_steps: 32
+learning_rate: 1e-5
 num_train_epochs: 3.0
 lr_scheduler_type: cosine
 warmup_ratio: 0.1
@@ -39,7 +39,7 @@ eval_steps: 50
 do_eval: true
 per_device_eval_batch_size: 1
 
-deepspeed: examples/deepspeed/ds_z2_offload_config.json
+deepspeed: examples/deepspeed/ds_z3_offload_config.json
 
 teacher_name: Qwen/Qwen3-30B-A3B-Instruct-2507
 select_type: random
