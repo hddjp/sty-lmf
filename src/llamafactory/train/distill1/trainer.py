@@ -49,12 +49,12 @@ logger = logging.getLogger(__name__)
 logger.handlers.clear()
 logger.setLevel(logging.DEBUG)
 
-#file_handler = logging.FileHandler(
-#    filename="/data/sty/LLaMA-Factory/log.txt",  
-#    mode="a",                   
-#    encoding="utf-8"             
-#)
-#logger.addHandler(file_handler)
+file_handler = logging.FileHandler(
+    filename="/data/sty/sty-lmf/log.txt",  
+    mode="a",                   
+    encoding="utf-8"             
+)
+logger.addHandler(file_handler)
 
 def padding_sequence(batch_samples):
     max_len = max([s["input_ids"].shape[1] for s in batch_samples])
@@ -300,12 +300,9 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
             mask = (selected_inputs["labels"] != -100).unsqueeze(-1).to(kl_div.device)
             kl_div_masked = kl_div * mask
             
-            loss11 = kl_div_masked.sum(-1).mean()
-            num_valid_tokens = mask.sum()
-            loss1 = kl_div_masked.sum() / num_valid_tokens
+            loss1 = kl_div_masked.sum(-1).mean()
         
             loss2 =  outputs.loss
-            #logger.debug(f"loss1: {loss1} ----- loss2: {loss2} ----- {num_valid_tokens} ----- {mask.shape}")
             loss = self.train_alpha * loss1 + (1-self.train_alpha) * loss2
         else:
             loss =  outputs.loss
