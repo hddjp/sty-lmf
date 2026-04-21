@@ -175,39 +175,45 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
             single_attn = attention_mask[idx]
 
             
+            
             #stytext = self.tokenizer.decode(single_input, skip_special_tokens=True)
-            #logger.debug(os.environ.get("RANK")+"--------"+repr(stytext))
+            #logger.debug(os.environ.get("RANK")+"--------"+repr(stytext)+"-------"+str(single_input.shape)+"-------"+str(single_label.shape)+"-------"+str(single_attn.shape)+"-------"+str(single_input.cpu().detach().tolist()))
 
             sep_pos = (single_input == sep_token_id).nonzero().squeeze(-1).tolist()
             if not isinstance(sep_pos, list):
                 sep_pos = [sep_pos] if sep_pos != -1 else []
-            
-            if not sep_pos:
-                logger.error("???????")
-                logger.error(single_input)
+            if len(sep_pos) == 0:
+                return inputs
 
             head_end = sep_pos[0]
             head_input = single_input[:head_end]
             head_label = single_label[:head_end]
             head_attn = single_attn[:head_end]
+            tail_start = sep_pos[-1]
+            tail_input = single_input[tail_start+1:]
+            tail_label = single_label[tail_start+1:]
+            tail_attn = single_attn[tail_start+1:]
 
             for i, pos in enumerate(sep_pos):
                 sep_end = pos + 1
                 if i == len(sep_pos) - 1:
-                    tail_input = single_input[sep_end:]
-                    tail_label = single_label[sep_end:]
-                    tail_attn = single_attn[sep_end:]
+                    break
+                    #tail_input = single_input[sep_end:]
+                    #tail_label = single_label[sep_end:]
+                    #tail_attn = single_attn[sep_end:]
                 else:
-                    tail_input = single_input[sep_end:sep_pos[i+1]]
-                    tail_label = single_label[sep_end:sep_pos[i+1]]
-                    tail_attn = single_attn[sep_end:sep_pos[i+1]]
+                    middle_input = single_input[sep_end:sep_pos[i+1]]
+                    middle_label = single_label[sep_end:sep_pos[i+1]]
+                    middle_attn = single_attn[sep_end:sep_pos[i+1]]
 
-                combined_input = torch.cat([head_input, tail_input])
-                combined_label = torch.cat([head_label, tail_label])
-                combined_attn = torch.cat([head_attn, tail_attn])
+                combined_input = torch.cat([head_input, middle_input ,tail_input])
+                combined_label = torch.cat([head_label, middle_label ,tail_label])
+                combined_attn = torch.cat([head_attn, middle_attn ,tail_attn])
 
                 #combined_text = self.tokenizer.decode(combined_input, skip_special_tokens=True)
-                #logger.debug(os.environ.get("RANK")+"--------"+str(i)+"---------"+repr(combined_text))
+                #logger.debug(os.environ.get("RANK")+"--------"+str(i)+"---------"+repr(combined_text)+"-------"+str(combined_input.shape)+"-------"+str(combined_label.shape)+"-------"+str(combined_attn.shape)+"-------"+str(combined_input.cpu().detach().tolist())+str(combined_label.cpu().detach().tolist()))
+                
+                
                 split_samples.append({
                     "input_ids": combined_input.unsqueeze(0),
                     "labels": combined_label.unsqueeze(0),
@@ -229,20 +235,29 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
                             teacher_logits = teacher_outputs.logits
                             teacher_probs = torch.nn.functional.softmax(teacher_logits, dim=-1)
                             student_log_probs = torch.nn.functional.log_softmax(outputs.logits, dim=-1)
-                                                        
-                            kl_div =  torch.nn.functional.kl_div( 
-                                student_log_probs,
-                                teacher_probs, 
-                                reduction="none"  
-                            )
+                            
+                            if "1" in self.select_type:       
+                                kl_div =  torch.nn.functional.kl_div( 
+                                    student_log_probs,
+                                    teacher_probs, 
+                                    reduction="none"  
+                                )
+                            
+                            elif "2" in self.select_type:
+                                log_ratio = student_log_probs - torch.log(teacher_probs + 1e-10)
+                                kl_div = 0.5 * log_ratio ** 2                                
+                            
+                            elif "3" in self.select_type:
+                                log_ratio = student_log_probs - torch.log(teacher_probs + 1e-10)
+                                ratio = torch.exp(log_ratio)
+                                kl_div = (ratio - 1) - log_ratio
+                                
                             mask = (sample["labels"] != -100).unsqueeze(-1).to(kl_div.device)
-                            
+                             
                             kl_div_masked = kl_div * mask
-                            #loss = kl_div_masked.sum(-1).mean(-1).item()
-                            
                             num_valid_tokens = mask.sum()
                             loss = kl_div_masked.sum() / num_valid_tokens
-                            
+
                         loss_list.append(loss)
                     
                     if "max" in self.select_type:
@@ -286,7 +301,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         #logger.debug(f"GPU {os.environ.get('RANK')}: {torch.cuda.memory_allocated(int(os.environ.get('RANK')))/1024**2:.2f} MB")
         #logger.debug(os.environ.get("RANK")+"-------"+str(selected_inputs["input_ids"].shape)+"-------"+str(selected_inputs["labels"].shape)+"-------"+str(selected_inputs["attention_mask"].shape))
         
-        #logger.debug(os.environ.get("RANK")+"-------mask"+str(selected_inputs["labels"].shape))
+        #logger.debug(os.environ.get("RANK")+"-------input"+str(selected_inputs["input_ids"])+"-------label"+str(selected_inputs["labels"])+"-------mask"+str(selected_inputs["attention_mask"]))
         
         outputs = model(**selected_inputs)
         
@@ -316,7 +331,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
             loss = self.train_alpha * loss1 + (1-self.train_alpha) * loss2
         else:
             loss =  outputs.loss
-            logger.debug(os.environ.get("RANK")+str(loss))
+            #logger.debug(os.environ.get("RANK")+str(loss))
         
         #if (
         #    self.args.average_tokens_across_devices

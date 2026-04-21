@@ -35,6 +35,10 @@ from ..callbacks import SaveProcessorCallback
 from ..fp8_utils import configure_fp8_environment, patch_accelerator_for_fp8, verify_fp8_status
 from ..trainer_utils import create_custom_optimizer, create_custom_scheduler
 #from trl.trainer.utils import prepare_deepspeed
+import subprocess
+import requests
+import io
+import time
 
 
 if TYPE_CHECKING:
@@ -87,6 +91,12 @@ def padding_sequence(batch_samples):
     final_batch["attention_mask"] = torch.stack(padded_attn)
     
     return final_batch
+
+def infer(input_dict):
+    data = {k: v.cpu().tolist() for k, v in input_dict.items()}
+    resp = requests.post("http://localhost:8888/infer", json=data)
+    buf = io.BytesIO(resp.content)
+    return torch.load(buf)
 
 class CustomSeq2SeqTrainer(Seq2SeqTrainer):
     r"""Inherits Seq2SeqTrainer to compute generative metrics such as BLEU and ROUGE."""
@@ -151,11 +161,16 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         self.train_alpha = train_alpha
         
         if self.train_alpha > 0 or "kl" in self.select_type:
+            client_dir = os.path.dirname(os.path.abspath(__file__))
+            server_path = os.path.join(client_dir, "model_infer.py")
+            cmd = f"CUDA_VISIBLE_DEVICES=0,1,2 python {server_path} --model {teacher_name}"
+            self.server_process = subprocess.Popen(cmd, shell=True)
+            time.sleep(180)
             
-            self.teacher_model = AutoModelForCausalLM.from_pretrained(teacher_name,torch_dtype=torch.bfloat16,device_map="cuda:1")
+            #self.teacher_model = AutoModelForCausalLM.from_pretrained(teacher_name,torch_dtype=torch.bfloat16,device_map="cuda:1")
             #for name, module in self.teacher_model.named_modules():
             #    logger.debug(name)
-            self.teacher_model.eval()
+            #self.teacher_model.eval()
             
         #self.teacher_model = prepare_deepspeed(self.teacher_model,1)
         #self.teacher_model = deepspeed.init_inference(model=self.teacher_model)
@@ -184,30 +199,36 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
             sep_pos = (single_input == sep_token_id).nonzero().squeeze(-1).tolist()
             if not isinstance(sep_pos, list):
                 sep_pos = [sep_pos] if sep_pos != -1 else []
+            if len(sep_pos) == 0:
+                return inputs
             
-            if not sep_pos:
-                logger.error("???????")
-                logger.error(single_input)
+            
 
             head_end = sep_pos[0]
             head_input = single_input[:head_end]
             head_label = single_label[:head_end]
             head_attn = single_attn[:head_end]
+            tail_start = sep_pos[-1]
+            tail_input = single_input[tail_start+1:]
+            tail_label = single_label[tail_start+1:]
+            tail_attn = single_attn[tail_start+1:]
+
 
             for i, pos in enumerate(sep_pos):
                 sep_end = pos + 1
                 if i == len(sep_pos) - 1:
-                    tail_input = single_input[sep_end:]
-                    tail_label = single_label[sep_end:]
-                    tail_attn = single_attn[sep_end:]
+                    break
+                    #tail_input = single_input[sep_end:]
+                    #tail_label = single_label[sep_end:]
+                    #tail_attn = single_attn[sep_end:]
                 else:
-                    tail_input = single_input[sep_end:sep_pos[i+1]]
-                    tail_label = single_label[sep_end:sep_pos[i+1]]
-                    tail_attn = single_attn[sep_end:sep_pos[i+1]]
+                    middle_input = single_input[sep_end:sep_pos[i+1]]
+                    middle_label = single_label[sep_end:sep_pos[i+1]]
+                    middle_attn = single_attn[sep_end:sep_pos[i+1]]
 
-                combined_input = torch.cat([head_input, tail_input])
-                combined_label = torch.cat([head_label, tail_label])
-                combined_attn = torch.cat([head_attn, tail_attn])
+                combined_input = torch.cat([head_input, middle_input ,tail_input])
+                combined_label = torch.cat([head_label, middle_label ,tail_label])
+                combined_attn = torch.cat([head_attn, middle_attn ,tail_attn])
 
                 #combined_text = self.tokenizer.decode(combined_input, skip_special_tokens=True)
                 #logger.debug(os.environ.get("RANK")+"--------"+str(i)+"---------"+repr(combined_text))
@@ -229,8 +250,10 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
                         elif "kl" in self.select_type:
                             outputs = model(**sample)
                             #teacher_outputs = self.teacher_model(**sample)
-                            teacher_outputs = self.teacher_model(**{k: v.to(self.teacher_model.device) for k, v in sample.items()})
-                            teacher_logits = teacher_outputs.logits.to(model.device)
+                            #teacher_outputs = self.teacher_model(**{k: v.to(self.teacher_model.device) for k, v in sample.items()})
+                            teacher_logits = infer(sample).to(model.device)
+                            #logger.debug(teacher_logits.shape)
+                            #teacher_logits = teacher_outputs.logits.to(model.device)
                             teacher_probs = torch.nn.functional.softmax(teacher_logits, dim=-1)
                             student_log_probs = torch.nn.functional.log_softmax(outputs.logits, dim=-1)
                                                         
@@ -288,15 +311,15 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         #logger.debug(f"GPU {os.environ.get('RANK')}: {torch.cuda.memory_allocated(int(os.environ.get('RANK')))/1024**2:.2f} MB")
         #logger.debug(os.environ.get("RANK")+"-------"+str(selected_inputs["input_ids"].shape)+"-------"+str(selected_inputs["labels"].shape)+"-------"+str(selected_inputs["attention_mask"].shape))
         
-        #logger.debug(os.environ.get("RANK")+"-------mask"+str(selected_inputs["labels"].shape))
+        logger.debug(os.environ.get("RANK")+"-------"+str(selected_inputs["labels"].shape))
         
         outputs = model(**selected_inputs)
         
         if self.train_alpha > 0:            
             with torch.no_grad():
-                #teacher_outputs = self.teacher_model(**selected_inputs)
-                teacher_outputs = self.teacher_model(**{k: v.to(self.teacher_model.device) for k, v in selected_inputs.items()})
-                teacher_logits = teacher_outputs.logits.to(model.device)
+                #teacher_outputs = self.teacher_model(**{k: v.to(self.teacher_model.device) for k, v in selected_inputs.items()})
+                #teacher_logits = teacher_outputs.logits.to(model.device)
+                teacher_logits = infer(selected_inputs).to(model.device)
                 teacher_probs = torch.nn.functional.softmax(teacher_logits, dim=-1)
                 
             student_log_probs = torch.nn.functional.log_softmax(outputs.logits, dim=-1)
@@ -314,7 +337,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
             loss1 = kl_div_masked.sum() / num_valid_tokens
         
             loss2 =  outputs.loss
-            logger.debug(f"loss1: {loss1} ----- loss2: {loss2} ----- {num_valid_tokens} ----- {mask.shape}")
+            #logger.debug(f"loss1: {loss1} ----- loss2: {loss2} ----- {num_valid_tokens} ----- {mask.shape}")
             loss = self.train_alpha * loss1 + (1-self.train_alpha) * loss2
         else:
             loss =  outputs.loss
@@ -391,4 +414,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
             for text, pred, label in zip(decoded_inputs, decoded_preds, decoded_labels):
                 f.write(json.dumps({"prompt": text, "predict": pred, "label": label}, ensure_ascii=False) + "\n")
 
+    def end_server(self):
+        self.server_process.terminate()
+        time.sleep(1)
     
