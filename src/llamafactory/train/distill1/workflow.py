@@ -159,3 +159,5 @@ def run_distill1(
 
     # Create model card
     create_modelcard_and_push(trainer, model_args, data_args, training_args, finetuning_args)
+
+    trainer.end_server()

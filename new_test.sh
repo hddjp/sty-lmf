@@ -9,12 +9,16 @@ MODEL_NAMES=(
 
 # 内层循环：每个模型需要执行的epoch列表（根据你的实际epoch修改）
 EPOCHS=(
-    "checkpoint-150"
+    "checkpoint-100"
+    "checkpoint-200"
     "checkpoint-300"
-    "checkpoint-450"
+    "checkpoint-400"
+    "checkpoint-500"
     "checkpoint-600"
-    "checkpoint-750"
-    "checkpoint-810"
+    "checkpoint-700"
+    "checkpoint-800"
+    "checkpoint-900"
+    "checkpoint-1000"
 )
 
 # ======================== 两层循环执行原有逻辑 ========================
