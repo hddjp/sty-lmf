@@ -97,6 +97,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         teacher_name,
         select_type,
         train_alpha,
+        kl_type,
         finetuning_args: "FinetuningArguments",
         processor: Optional["ProcessorMixin"],
         model_args: Optional["ModelArguments"] = None,
@@ -149,6 +150,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
 
         self.select_type = select_type
         self.train_alpha = train_alpha
+        self.kl_type = kl_type
         
         if self.train_alpha > 0 or "kl" in self.select_type:
             self.teacher_model = AutoModelForCausalLM.from_pretrained(teacher_name,torch_dtype=torch.bfloat16).to(f"cuda:{os.environ.get('RANK')}")
@@ -236,21 +238,13 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
                             teacher_probs = torch.nn.functional.softmax(teacher_logits, dim=-1)
                             student_log_probs = torch.nn.functional.log_softmax(outputs.logits, dim=-1)
                             
-                            if "1" in self.select_type:       
-                                kl_div =  torch.nn.functional.kl_div( 
-                                    student_log_probs,
-                                    teacher_probs, 
-                                    reduction="none"  
-                                )
-                            
-                            elif "2" in self.select_type:
-                                log_ratio = student_log_probs - torch.log(teacher_probs + 1e-10)
-                                kl_div = 0.5 * log_ratio ** 2                                
-                            
-                            elif "3" in self.select_type:
-                                log_ratio = student_log_probs - torch.log(teacher_probs + 1e-10)
-                                ratio = torch.exp(log_ratio)
-                                kl_div = (ratio - 1) - log_ratio
+                             
+                            kl_div =  torch.nn.functional.kl_div( 
+                                student_log_probs,
+                                teacher_probs, 
+                                reduction="none"  
+                            )
+                        
                                 
                             mask = (sample["labels"] != -100).unsqueeze(-1).to(kl_div.device)
                              
@@ -313,12 +307,35 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
                 
             student_log_probs = torch.nn.functional.log_softmax(outputs.logits, dim=-1)
             
-            kl_div =  torch.nn.functional.kl_div( 
-                student_log_probs,
-                teacher_probs, 
-                reduction="none"  
-            )
+            if self.kl_type == 1:
+                kl_div =  torch.nn.functional.kl_div( 
+                    student_log_probs,
+                    teacher_probs, 
+                    reduction="none"  
+                )
             
+            elif self.kl_type == 2:
+                log_ratio = student_log_probs - torch.log(teacher_probs + 1e-10 )
+                kl_div = teacher_probs * (0.5 * log_ratio ** 2)                            
+            
+            
+            elif self.kl_type == 3:
+                log_ratio = student_log_probs - torch.log(teacher_probs + 1e-10)
+                ratio = torch.exp(log_ratio)
+                kl_div = teacher_probs * ((ratio - 1) - log_ratio)
+            
+            # kl_div=[kl_div1,kl_div2,kl_div3]
+            # for i in range(len(kl_div)):
+            #     kld=kl_div[i]
+            #     mask = (selected_inputs["labels"] != -100).unsqueeze(-1).to(kld.device)
+            #     kl_div_masked = kld * mask
+                
+            #     #loss11 = kl_div_masked.sum(-1).mean()
+            #     num_valid_tokens = mask.sum()
+            #     loss = kl_div_masked.sum() / num_valid_tokens
+            #     logger.debug(f"loss{i}: {loss}")
+            
+           # kl_div=kl_div[1]
             mask = (selected_inputs["labels"] != -100).unsqueeze(-1).to(kl_div.device)
             kl_div_masked = kl_div * mask
             
@@ -327,7 +344,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
             loss1 = kl_div_masked.sum() / num_valid_tokens
         
             loss2 =  outputs.loss
-            #logger.debug(f"loss1: {loss1} ----- loss2: {loss2} ----- {num_valid_tokens} ----- {mask.shape}")
+            logger.debug(f"loss1: {loss1} ----- loss2: {loss2} ----- {num_valid_tokens} ----- {mask.shape}")
             loss = self.train_alpha * loss1 + (1-self.train_alpha) * loss2
         else:
             loss =  outputs.loss
