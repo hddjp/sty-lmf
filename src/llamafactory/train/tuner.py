@@ -35,10 +35,7 @@ from .pt import run_pt
 from .rm import run_rm
 from .sft import run_sft
 from .distill import run_distill
-<<<<<<< HEAD
-=======
 from .distill1 import run_distill1
->>>>>>> origin/fudan
 from .trainer_utils import (
     get_placement_group,
     get_ray_head_node_ip,
@@ -62,17 +59,11 @@ logger = logging.get_logger(__name__)
 def _training_function(config: dict[str, Any]) -> None:
     args = config.get("args")
     callbacks: list[Any] = config.get("callbacks")
-<<<<<<< HEAD
-    teacher_name = args.pop("teacher_name")
-    select_type = args.pop("select_type")
-    train_alpha = args.pop("train_alpha")
-=======
     
     teacher_name = args.pop("teacher_name",None)
     select_type = args.pop("select_type",None)
     train_alpha = args.pop("train_alpha",None)
     kl_type = args.pop("kl_type",None)
->>>>>>> origin/fudan
     
     model_args, data_args, training_args, finetuning_args, generating_args = get_train_args(args)
 
