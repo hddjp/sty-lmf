@@ -45,17 +45,17 @@ if TYPE_CHECKING:
     from ...hparams import FinetuningArguments, ModelArguments, TrainingArguments
 
 
-logger = logging.getLogger(__name__)
-logger.handlers.clear()
-logger.setLevel(logging.DEBUG)
-logger.propagate = False
+# logger = logging.getLogger(__name__)
+# logger.handlers.clear()
+# logger.setLevel(logging.DEBUG)
+# logger.propagate = False
 
-file_handler = logging.FileHandler(
-    filename="/data/sty/sty-lmf/log.txt",  
-    mode="a",                   
-    encoding="utf-8"             
-)
-logger.addHandler(file_handler)
+# file_handler = logging.FileHandler(
+#     filename="/data/sty/sty-lmf/log.txt",  
+#     mode="a",                   
+#     encoding="utf-8"             
+# )
+# logger.addHandler(file_handler)
 
 def padding_sequence(batch_samples):
     max_len = max([s["input_ids"].shape[1] for s in batch_samples])
@@ -344,7 +344,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
             loss1 = kl_div_masked.sum() / num_valid_tokens
         
             loss2 =  outputs.loss
-            logger.debug(f"loss1: {loss1} ----- loss2: {loss2} ----- {num_valid_tokens} ----- {mask.shape}")
+            #logger.debug(f"loss1: {loss1} ----- loss2: {loss2} ----- {num_valid_tokens} ----- {mask.shape}")
             loss = self.train_alpha * loss1 + (1-self.train_alpha) * loss2
         else:
             loss =  outputs.loss

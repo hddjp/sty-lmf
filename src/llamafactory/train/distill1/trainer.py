@@ -49,16 +49,16 @@ if TYPE_CHECKING:
     from ...hparams import FinetuningArguments, ModelArguments, TrainingArguments
 
 
-logger = logging.getLogger(__name__)
-logger.handlers.clear()
-logger.setLevel(logging.DEBUG)
+# logger = logging.getLogger(__name__)
+# logger.handlers.clear()
+# logger.setLevel(logging.DEBUG)
 
-file_handler = logging.FileHandler(
-    filename="/data/sty/sty-lmf/log.txt",  
-    mode="a",                   
-    encoding="utf-8"             
-)
-logger.addHandler(file_handler)
+# file_handler = logging.FileHandler(
+#     filename="/data/sty/sty-lmf/log.txt",  
+#     mode="a",                   
+#     encoding="utf-8"             
+# )
+# logger.addHandler(file_handler)
 
 def padding_sequence(batch_samples):
     max_len = max([s["input_ids"].shape[1] for s in batch_samples])
@@ -311,7 +311,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         #logger.debug(f"GPU {os.environ.get('RANK')}: {torch.cuda.memory_allocated(int(os.environ.get('RANK')))/1024**2:.2f} MB")
         #logger.debug(os.environ.get("RANK")+"-------"+str(selected_inputs["input_ids"].shape)+"-------"+str(selected_inputs["labels"].shape)+"-------"+str(selected_inputs["attention_mask"].shape))
         
-        logger.debug(os.environ.get("RANK")+"-------"+str(selected_inputs["labels"].shape))
+        #logger.debug(os.environ.get("RANK")+"-------"+str(selected_inputs["labels"].shape))
         
         outputs = model(**selected_inputs)
         
