@@ -48,4 +48,4 @@ teacher_name: /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/models/models--Q
 select_type: distill_kl_min
 output_dir: saves/qwen3-4b/distill_kl_min
 train_alpha: 1
-kl_type: 1
+kl_type: 3

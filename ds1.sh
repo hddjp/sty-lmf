@@ -1,8 +1,8 @@
 JOB_NAMES=(
-  "sft_ce_min"
-  "sft_ce_max"
-  "sft_kl_min"
-  "sft_kl_max"
+  "distill_ce_min"
+  "distill_ce_max"
+  "distill_kl_min"
+  "distill_kl_max"
 )
 
 for JOB_NAME in "${JOB_NAMES[@]}"; do
