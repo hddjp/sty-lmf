@@ -64,6 +64,7 @@ def _training_function(config: dict[str, Any]) -> None:
     select_type = args.pop("select_type",None)
     train_alpha = args.pop("train_alpha",None)
     kl_type = args.pop("kl_type",None)
+    distill_temp = args.pop("distill_temp",None)
     
     model_args, data_args, training_args, finetuning_args, generating_args = get_train_args(args)
 
@@ -108,7 +109,7 @@ def _training_function(config: dict[str, Any]) -> None:
     elif finetuning_args.stage == "kto":
         run_kto(model_args, data_args, training_args, finetuning_args, callbacks)
     elif finetuning_args.stage == "distill":
-        run_distill(teacher_name,select_type,train_alpha,kl_type,model_args, data_args, training_args, finetuning_args, generating_args ,callbacks)
+        run_distill(teacher_name,select_type,train_alpha,kl_type,distill_temp,model_args, data_args, training_args, finetuning_args, generating_args ,callbacks)
     elif finetuning_args.stage == "distill1":
         run_distill1(teacher_name,select_type,train_alpha,model_args, data_args, training_args, finetuning_args, generating_args ,callbacks)
     else:

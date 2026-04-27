@@ -98,6 +98,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         select_type,
         train_alpha,
         kl_type,
+        distill_temp,
         finetuning_args: "FinetuningArguments",
         processor: Optional["ProcessorMixin"],
         model_args: Optional["ModelArguments"] = None,
@@ -151,6 +152,8 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         self.select_type = select_type
         self.train_alpha = train_alpha
         self.kl_type = kl_type
+        self.distill_temp = 1 if distill_temp is None else distill_temp
+        logger.debug(self.distill_temp)
         
         if self.train_alpha > 0 or "kl" in self.select_type:
             self.teacher_model = AutoModelForCausalLM.from_pretrained(teacher_name,torch_dtype=torch.bfloat16).to(f"cuda:{os.environ.get('RANK')}")
@@ -303,9 +306,9 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
             with torch.no_grad():
                 teacher_outputs = self.teacher_model(**selected_inputs)
                 teacher_logits = teacher_outputs.logits
-                teacher_probs = torch.nn.functional.softmax(teacher_logits, dim=-1)
+                teacher_probs = torch.nn.functional.softmax(teacher_logits / self.distill_temp, dim=-1)
                 
-            student_log_probs = torch.nn.functional.log_softmax(outputs.logits, dim=-1)
+            student_log_probs = torch.nn.functional.log_softmax(outputs.logits / self.distill_temp, dim=-1)
             
             if self.kl_type == 1:
                 kl_div =  torch.nn.functional.kl_div( 
@@ -341,7 +344,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
             
             #loss11 = kl_div_masked.sum(-1).mean()
             num_valid_tokens = mask.sum()
-            loss1 = kl_div_masked.sum() / num_valid_tokens
+            loss1 = kl_div_masked.sum() / num_valid_tokens * self.distill_temp * self.distill_temp
         
             loss2 =  outputs.loss
             #logger.debug(f"loss1: {loss1} ----- loss2: {loss2} ----- {num_valid_tokens} ----- {mask.shape}")
