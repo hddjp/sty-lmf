@@ -1,5 +1,5 @@
 ### model
-model_name_or_path: Qwen/Qwen3-0.6B #Qwen/Qwen3-4B-Instruct-2507
+model_name_or_path: /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/models/models--Qwen--Qwen3-4B-Instruct-2507/snapshots/cdbee75f17c01a7cc42f958dc650907174af0554 #Qwen/Qwen3-4B-Instruct-2507
 trust_remote_code: true
 flash_attn: fa2
 
@@ -10,24 +10,22 @@ finetuning_type: full
 
 
 ### dataset
-dataset: gsm8kall #,MATHall
+dataset: gsm8kall,MATHall
 template: qwen3_nothink
 cutoff_len: 40000
-max_samples: 32
-disable_shuffling: true 
 
 ### output
-logging_steps: 5
-save_steps: 100
+logging_steps: 1
+save_steps: 150
 plot_loss: true
 save_only_model: false
-report_to: none  # choices: [none, wandb, tensorboard, swanlab, mlflow]
+report_to: wandb  # choices: [none, wandb, tensorboard, swanlab, mlflow]
 
 ### train
 per_device_train_batch_size: 1
-gradient_accumulation_steps: 8
+gradient_accumulation_steps: 32
 learning_rate: 1e-5
-num_train_epochs: 8.0
+num_train_epochs: 10.0
 lr_scheduler_type: cosine
 warmup_ratio: 0.1
 bf16: true
@@ -35,7 +33,6 @@ resume_from_checkpoint: null
 overwrite_output_dir: true
 enable_thinking: true
 max_grad_norm: 1
-
 
 val_size: 0.05
 eval_strategy: steps
@@ -47,10 +44,9 @@ metric_for_best_model: eval_loss
 
 deepspeed: examples/deepspeed/ds_z2_offload_config.json
 
-teacher_name: Qwen/Qwen3-4B-Instruct-2507  #Qwen/Qwen3-30B-A3B-Instruct-2507 #Qwen/Qwen3-4B-Instruct-2507 
+teacher_name: /mnt/shared-storage-gpfs2/ai4scifm-gpfs02/wuyixin/models/models--Qwen--Qwen3-30B-A3B-Instruct-2507/snapshots/0d7cf23991f47feeb3a57ecb4c9cee8ea4a17bfe #Qwen/Qwen3-4B-Instruct-2507 #Qwen/Qwen3-0.6B #Qwen/Qwen3-30B-A3B-Instruct-2507
 select_type: random
-output_dir: saves/qwen3-0.6b/distill_temp2
+output_dir: saves/qwen3-4b/distill_random3
 train_alpha: 1
 kl_type: 3
 distill_temp: 2
-
