@@ -1,69 +1,1447 @@
-Using auto half precision backend
-The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
-Using auto half precision backend
-The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
-Using auto half precision backend
-The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
-Currently training with a batch size of: 1
-Currently training with a batch size of: 1
-Using auto half precision backend
-The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
-Currently training with a batch size of: 1
-Currently training with a batch size of: 1
-***** Running training *****
-  Num examples = 7
-  Num Epochs = 1
-  Instantaneous batch size per device = 1
-  Total train batch size (w. parallel, distributed & accumulation) = 128
-  Gradient Accumulation steps = 32
-  Total optimization steps = 1
-***** Running training *****
-  Num examples = 7
-  Num Epochs = 1
-  Instantaneous batch size per device = 1
-  Total train batch size (w. parallel, distributed & accumulation) = 128
-  Gradient Accumulation steps = 32
-  Total optimization steps = 1
-***** Running training *****
-  Number of trainable parameters = 4,022,468,096
-  Num examples = 7
-  Num Epochs = 1
-  Instantaneous batch size per device = 1
-  Total train batch size (w. parallel, distributed & accumulation) = 128
-  Gradient Accumulation steps = 32
-  Total optimization steps = 1
-  Number of trainable parameters = 4,022,468,096
-  Number of trainable parameters = 4,022,468,096
-1
-Trainer.tokenizer is now deprecated. You should use Trainer.processing_class instead.
-1
-Trainer.tokenizer is now deprecated. You should use Trainer.processing_class instead.
-1
-Trainer.tokenizer is now deprecated. You should use Trainer.processing_class instead.
-***** Running training *****
-  Num examples = 7
-  Num Epochs = 1
-  Instantaneous batch size per device = 1
-  Total train batch size (w. parallel, distributed & accumulation) = 128
-  Gradient Accumulation steps = 32
-  Total optimization steps = 1
-  Number of trainable parameters = 4,022,468,096
-3--------"user\nLet's think step by step. Output the final answer after '####'.\nAlbert is wondering how much pizza he can eat in one day. He buys 2 large pizzas and 2 small pizzas. A large pizza has 16 slices and a small pizza has 8 slices. If he eats it all, how many pieces does he eat that day?\nassistant\nLet's break it down step by step:\n\n1. Albert buys 2 large pizzas.\n   - Each large pizza has 16 slices.\n   - So, total slices from large pizzas = 2 × 16 = 32 slices.\n\n2. He also buys 2 small pizzas.\n   - Each small pizza has 8 slices.\n   - So, total slices from small pizzas = 2 × 8 = 16 slices.\n\n3. Total slices Albert eats = slices from large + slices from small\n   - Total = 32 + 16 = 48 slices.\n\nSo, Albert eats 48 pieces of pizza in one day.\n\n#### 48\n"-------torch.Size([224])-------torch.Size([224])-------torch.Size([224])-------[151644, 872, 198, 10061, 594, 1744, 3019, 553, 3019, 13, 9258, 279, 1590, 4226, 1283, 364, 820, 23569, 66622, 374, 20293, 1246, 1753, 22502, 566, 646, 8180, 304, 825, 1899, 13, 1260, 49531, 220, 17, 3460, 87770, 323, 220, 17, 2613, 87770, 13, 362, 3460, 22502, 702, 220, 16, 21, 34254, 323, 264, 2613, 22502, 702, 220, 23, 34254, 13, 1416, 566, 49677, 432, 678, 11, 1246, 1657, 9666, 1558, 566, 8180, 429, 1899, 30, 151645, 198, 151644, 77091, 198, 10061, 594, 1438, 432, 1495, 3019, 553, 3019, 1447, 16, 13, 17513, 49531, 220, 17, 3460, 87770, 624, 256, 481, 8886, 3460, 22502, 702, 220, 16, 21, 34254, 624, 256, 481, 2055, 11, 2790, 34254, 504, 3460, 87770, 284, 220, 17, 24768, 220, 16, 21, 284, 220, 18, 17, 34254, 382, 17, 13, 1260, 1083, 49531, 220, 17, 2613, 87770, 624, 256, 481, 8886, 2613, 22502, 702, 220, 23, 34254, 624, 256, 481, 2055, 11, 2790, 34254, 504, 2613, 87770, 284, 220, 17, 24768, 220, 23, 284, 220, 16, 21, 34254, 382, 18, 13, 10657, 34254, 17513, 49677, 284, 34254, 504, 3460, 488, 34254, 504, 2613, 198, 256, 481, 10657, 284, 220, 18, 17, 488, 220, 16, 21, 284, 220, 19, 23, 34254, 382, 4416, 11, 17513, 49677, 220, 19, 23, 9666, 315, 22502, 304, 825, 1899, 382, 820, 220, 19, 23, 151645, 198]
-2--------"user\nLet's think step by step. Output the final answer after '####'.\nKen created a care package to send to his brother, who was away at boarding school.  Ken placed a box on a scale, and then he poured into the box enough jelly beans to bring the weight to 2 pounds.  Then, he added enough brownies to cause the weight to triple.  Next, he added another 2 pounds of jelly beans.  And finally, he added enough gummy worms to double the weight once again.  What was the final weight of the box of goodies, in pounds?\nassistant\nLet's go step by step:\n\n1. **Initial weight**: Ken places a box on a scale. The box itself has some weight, but we are not told its weight. However, we are told that he **pours in enough jelly beans to bring the total weight to 2 pounds**. That means the **total weight after adding the first jelly beans is 2 pounds**.\n\n   So, at this point:  \n   → Weight = 2 pounds\n\n2. **He adds enough brownies to cause the weight to triple**.  \n   Tripling the current weight:  \n   → 2 × 3 = 6 pounds\n\n   So now:  \n   → Weight = 6 pounds\n\n3. **He adds another 2 pounds of jelly beans**.  \n   → 6 + 2 = 8 pounds\n\n   So now:  \n   → Weight = 8 pounds\n\n4. **He adds enough gummy worms to double the weight once again**.  \n   → 8 × 2 = 16 pounds\n\n   So the final weight is:  \n   → 16 pounds\n\n#### 16\n"-------torch.Size([368])-------torch.Size([368])-------torch.Size([368])-------[151644, 872, 198, 10061, 594, 1744, 3019, 553, 3019, 13, 9258, 279, 1590, 4226, 1283, 364, 820, 23569, 47241, 3465, 264, 2453, 6328, 311, 3624, 311, 806, 10641, 11, 879, 572, 3123, 518, 48969, 2906, 13, 220, 14259, 9099, 264, 3745, 389, 264, 5452, 11, 323, 1221, 566, 42933, 1119, 279, 3745, 3322, 51341, 26896, 311, 4446, 279, 4680, 311, 220, 17, 16302, 13, 220, 5005, 11, 566, 3694, 3322, 13876, 550, 311, 5240, 279, 4680, 311, 23725, 13, 220, 9295, 11, 566, 3694, 2441, 220, 17, 16302, 315, 51341, 26896, 13, 220, 1597, 5499, 11, 566, 3694, 3322, 342, 8574, 61900, 311, 1990, 279, 4680, 3055, 1549, 13, 220, 3555, 572, 279, 1590, 4680, 315, 279, 3745, 315, 69755, 11, 304, 16302, 30, 151645, 198, 151644, 77091, 198, 10061, 594, 728, 3019, 553, 3019, 1447, 16, 13, 3070, 6341, 4680, 95518, 14259, 7482, 264, 3745, 389, 264, 5452, 13, 576, 3745, 5086, 702, 1045, 4680, 11, 714, 582, 525, 537, 3229, 1181, 4680, 13, 4354, 11, 582, 525, 3229, 429, 566, 3070, 79, 2471, 304, 3322, 51341, 26896, 311, 4446, 279, 2790, 4680, 311, 220, 17, 16302, 334, 13, 2938, 3363, 279, 3070, 5035, 4680, 1283, 7842, 279, 1156, 51341, 26896, 374, 220, 17, 16302, 334, 382, 256, 2055, 11, 518, 419, 1459, 25, 2303, 256, 11397, 16516, 284, 220, 17, 16302, 271, 17, 13, 3070, 1519, 11367, 3322, 13876, 550, 311, 5240, 279, 4680, 311, 23725, 334, 13, 2303, 256, 12359, 11863, 279, 1482, 4680, 25, 2303, 256, 11397, 220, 17, 24768, 220, 18, 284, 220, 21, 16302, 271, 256, 2055, 1431, 25, 2303, 256, 11397, 16516, 284, 220, 21, 16302, 271, 18, 13, 3070, 1519, 11367, 2441, 220, 17, 16302, 315, 51341, 26896, 334, 13, 2303, 256, 11397, 220, 21, 488, 220, 17, 284, 220, 23, 16302, 271, 256, 2055, 1431, 25, 2303, 256, 11397, 16516, 284, 220, 23, 16302, 271, 19, 13, 3070, 1519, 11367, 3322, 342, 8574, 61900, 311, 1990, 279, 4680, 3055, 1549, 334, 13, 2303, 256, 11397, 220, 23, 24768, 220, 17, 284, 220, 16, 21, 16302, 271, 256, 2055, 279, 1590, 4680, 374, 25, 2303, 256, 11397, 220, 16, 21, 16302, 271, 820, 220, 16, 21, 151645, 198, 151643, 151643]
-1--------"user\nLet's think step by step. Output the final answer after '####'.\nBetty is saving money for a new wallet which costs $100. Betty has only half of the money she needs. Her parents decided to give her $15 for that purpose, and her grandparents twice as much as her parents. How much more money does Betty need to buy the wallet?\nassistant\nLet's solve this step by step:\n\n1. The wallet costs $100.\n\n2. Betty has only half of the money she needs:\n   - Half of $100 = $50\n   - So Betty currently has $50.\n\n3. Her parents give her $15.\n\n4. Her grandparents give her twice as much as her parents:\n   - 2 × $15 = $30\n\n5. Total money received from parents and grandparents:\n   - $15 (parents) + $30 (grandparents) = $45\n\n6. Total money Betty now has:\n   - $50 (her own) + $45 (from family) = $95\n\n7. Amount still needed to buy the $100 wallet:\n   - $100 - $95 = $5\n\n#### 5\n"-------torch.Size([272])-------torch.Size([272])-------torch.Size([272])-------[151644, 872, 198, 10061, 594, 1744, 3019, 553, 3019, 13, 9258, 279, 1590, 4226, 1283, 364, 820, 23569, 56199, 1881, 374, 13997, 3220, 369, 264, 501, 15085, 892, 7049, 400, 16, 15, 15, 13, 55011, 702, 1172, 4279, 315, 279, 3220, 1340, 3880, 13, 6252, 6562, 6635, 311, 2968, 1059, 400, 16, 20, 369, 429, 7428, 11, 323, 1059, 55335, 10917, 438, 1753, 438, 1059, 6562, 13, 2585, 1753, 803, 3220, 1558, 55011, 1184, 311, 3695, 279, 15085, 30, 151645, 198, 151644, 77091, 198, 10061, 594, 11625, 419, 3019, 553, 3019, 1447, 16, 13, 576, 15085, 7049, 400, 16, 15, 15, 382, 17, 13, 55011, 702, 1172, 4279, 315, 279, 3220, 1340, 3880, 510, 256, 481, 25839, 315, 400, 16, 15, 15, 284, 400, 20, 15, 198, 256, 481, 2055, 55011, 5023, 702, 400, 20, 15, 382, 18, 13, 6252, 6562, 2968, 1059, 400, 16, 20, 382, 19, 13, 6252, 55335, 2968, 1059, 10917, 438, 1753, 438, 1059, 6562, 510, 256, 481, 220, 17, 24768, 400, 16, 20, 284, 400, 18, 15, 271, 20, 13, 10657, 3220, 3949, 504, 6562, 323, 55335, 510, 256, 481, 400, 16, 20, 320, 25456, 8, 488, 400, 18, 15, 320, 52666, 25456, 8, 284, 400, 19, 20, 271, 21, 13, 10657, 3220, 55011, 1431, 702, 510, 256, 481, 400, 20, 15, 320, 1923, 1828, 8, 488, 400, 19, 20, 320, 1499, 2997, 8, 284, 400, 24, 20, 271, 22, 13, 25783, 2058, 4362, 311, 3695, 279, 400, 16, 15, 15, 15085, 510, 256, 481, 400, 16, 15, 15, 481, 400, 24, 20, 284, 400, 20, 271, 820, 220, 20, 151645, 198, 151643, 151643, 151643, 151643, 151643]
-1
-Trainer.tokenizer is now deprecated. You should use Trainer.processing_class instead.
-0--------"user\nLet's think step by step. Output the final answer after '####'.\nJames writes a 3-page letter to 2 different friends twice a week.  How many pages does he write a year?\nassistant\nLet's break this down step by step:\n\n1. James writes a 3-page letter to **2 different friends**.\n   - So per letter-writing event: 3 pages × 2 friends = 6 pages.\n\n2. He does this **twice a week**.\n   - So per week: 6 pages × 2 = 12 pages.\n\n3. There are **52 weeks in a year**.\n   - So per year: 12 pages/week × 52 weeks = 624 pages.\n\n#### 624\n"-------torch.Size([168])-------torch.Size([168])-------torch.Size([168])-------[151644, 872, 198, 10061, 594, 1744, 3019, 553, 3019, 13, 9258, 279, 1590, 4226, 1283, 364, 820, 23569, 28084, 13914, 264, 220, 18, 15112, 6524, 311, 220, 17, 2155, 4780, 10917, 264, 2003, 13, 220, 2585, 1657, 6816, 1558, 566, 3270, 264, 1042, 30, 151645, 198, 151644, 77091, 198, 10061, 594, 1438, 419, 1495, 3019, 553, 3019, 1447, 16, 13, 7801, 13914, 264, 220, 18, 15112, 6524, 311, 3070, 17, 2155, 4780, 334, 624, 256, 481, 2055, 817, 6524, 96665, 1538, 25, 220, 18, 6816, 24768, 220, 17, 4780, 284, 220, 21, 6816, 382, 17, 13, 1260, 1558, 419, 3070, 15560, 558, 264, 2003, 334, 624, 256, 481, 2055, 817, 2003, 25, 220, 21, 6816, 24768, 220, 17, 284, 220, 16, 17, 6816, 382, 18, 13, 2619, 525, 3070, 20, 17, 5555, 304, 264, 1042, 334, 624, 256, 481, 2055, 817, 1042, 25, 220, 16, 17, 6816, 14, 10264, 24768, 220, 20, 17, 5555, 284, 220, 21, 17, 19, 6816, 382, 820, 220, 21, 17, 19, 151645, 198]
-1
-Trainer.tokenizer is now deprecated. You should use Trainer.processing_class instead.
-1--------"user\nLet's think step by step. Output the final answer after '####'.\nMark has a garden with flowers. He planted plants of three different colors in it. Ten of them are yellow, and there are 80% more of those in purple. There are only 25% as many green flowers as there are yellow and purple flowers. How many flowers does Mark have in his garden?\nassistant\nWe are given:\n\n- Number of yellow flowers = 10  \n- Number of purple flowers = 80% more than yellow  \n- Number of green flowers = 25% as many as the total of yellow and purple flowers\n\nLet’s solve step by step.\n\n---\n\n**Step 1: Find the number of purple flowers**\n\n80% more than yellow means:\n\nPurple = Yellow + 80% of Yellow  \n= 10 + 0.8 × 10  \n= 10 + 8  \n= **18**\n\nSo, there are 18 purple flowers.\n\n---\n\n**Step 2: Find the total of yellow and purple flowers**\n\nYellow + Purple = 10 + 18 = **28**\n\n---\n\n**Step 3: Find the number of green flowers**\n\nGreen = 25% of (Yellow + Purple)  \n= 0.25 × 28  \n= **7**\n\nSo, there are 7 green flowers.\n\n---\n\n**Step 4: Total number of flowers**\n\nTotal = Yellow + Purple + Green  \n= 10 + 18 + 7  \n= **35**\n\n#### 35\n"-------torch.Size([336])-------torch.Size([336])-------torch.Size([336])-------[151644, 872, 198, 10061, 594, 1744, 3019, 553, 3019, 13, 9258, 279, 1590, 4226, 1283, 364, 820, 23569, 8949, 702, 264, 13551, 448, 19281, 13, 1260, 38341, 10779, 315, 2326, 2155, 7987, 304, 432, 13, 17695, 315, 1105, 525, 13753, 11, 323, 1052, 525, 220, 23, 15, 4, 803, 315, 1846, 304, 24932, 13, 2619, 525, 1172, 220, 17, 20, 4, 438, 1657, 6176, 19281, 438, 1052, 525, 13753, 323, 24932, 19281, 13, 2585, 1657, 19281, 1558, 4389, 614, 304, 806, 13551, 30, 151645, 198, 151644, 77091, 198, 1654, 525, 2661, 1447, 12, 5624, 315, 13753, 19281, 284, 220, 16, 15, 2303, 12, 5624, 315, 24932, 19281, 284, 220, 23, 15, 4, 803, 1091, 13753, 2303, 12, 5624, 315, 6176, 19281, 284, 220, 17, 20, 4, 438, 1657, 438, 279, 2790, 315, 13753, 323, 24932, 19281, 271, 10061, 748, 11625, 3019, 553, 3019, 382, 44364, 334, 8304, 220, 16, 25, 7379, 279, 1372, 315, 24932, 19281, 56177, 23, 15, 4, 803, 1091, 13753, 3363, 1447, 74513, 284, 25462, 488, 220, 23, 15, 4, 315, 25462, 2303, 28, 220, 16, 15, 488, 220, 15, 13, 23, 24768, 220, 16, 15, 2303, 28, 220, 16, 15, 488, 220, 23, 2303, 28, 3070, 16, 23, 56177, 4416, 11, 1052, 525, 220, 16, 23, 24932, 19281, 382, 44364, 334, 8304, 220, 17, 25, 7379, 279, 2790, 315, 13753, 323, 24932, 19281, 56177, 47699, 488, 40389, 284, 220, 16, 15, 488, 220, 16, 23, 284, 3070, 17, 23, 56177, 44364, 334, 8304, 220, 18, 25, 7379, 279, 1372, 315, 6176, 19281, 56177, 19576, 284, 220, 17, 20, 4, 315, 320, 47699, 488, 40389, 8, 2303, 28, 220, 15, 13, 17, 20, 24768, 220, 17, 23, 2303, 28, 3070, 22, 56177, 4416, 11, 1052, 525, 220, 22, 6176, 19281, 382, 44364, 334, 8304, 220, 19, 25, 10657, 1372, 315, 19281, 56177, 7595, 284, 25462, 488, 40389, 488, 7840, 2303, 28, 220, 16, 15, 488, 220, 16, 23, 488, 220, 22, 2303, 28, 3070, 18, 20, 56177, 820, 220, 18, 20, 151645, 198]
-1
-Trainer.tokenizer is now deprecated. You should use Trainer.processing_class instead.
-0--------"user\nLet's think step by step. Output the final answer after '####'.\nWeng earns $12 an hour for babysitting. Yesterday, she just did 50 minutes of babysitting. How much did she earn?\nassistant\nWe are given:\n\n- Weng earns $12 per hour.\n- She babysat for 50 minutes.\n\nWe need to calculate how much she earned for 50 minutes.\n\nStep 1: Convert 50 minutes to hours.\n\nSince there are 60 minutes in an hour:\n$$\n50 \\text{ minutes} = \\frac{50}{60} \\text{ hours} = \\frac{5}{6} \\text{ hours}\n$$\n\nStep 2: Multiply the hourly rate by the number of hours worked.\n\n$$\n\\text{Earnings} = 12 \\times \\frac{5}{6} = \\frac{60}{6} = 10\n$$\n\nSo, Weng earned $10.\n\n#### 10\n"-------torch.Size([224])-------torch.Size([224])-------torch.Size([224])-------[151644, 872, 198, 10061, 594, 1744, 3019, 553, 3019, 13, 9258, 279, 1590, 4226, 1283, 364, 820, 23569, 54, 826, 63759, 400, 16, 17, 458, 6460, 369, 70583, 14810, 13, 60033, 11, 1340, 1101, 1521, 220, 20, 15, 4420, 315, 70583, 14810, 13, 2585, 1753, 1521, 1340, 7232, 30, 151645, 198, 151644, 77091, 198, 1654, 525, 2661, 1447, 12, 467, 826, 63759, 400, 16, 17, 817, 6460, 624, 12, 2932, 70583, 266, 369, 220, 20, 15, 4420, 382, 1654, 1184, 311, 11047, 1246, 1753, 1340, 15303, 369, 220, 20, 15, 4420, 382, 8304, 220, 16, 25, 7169, 220, 20, 15, 4420, 311, 4115, 382, 12549, 1052, 525, 220, 21, 15, 4420, 304, 458, 6460, 510, 14085, 198, 20, 15, 1124, 1318, 90, 4420, 92, 284, 1124, 37018, 90, 20, 15, 15170, 21, 15, 92, 1124, 1318, 90, 4115, 92, 284, 1124, 37018, 90, 20, 15170, 21, 92, 1124, 1318, 90, 4115, 532, 14085, 271, 8304, 220, 17, 25, 71059, 279, 46629, 4379, 553, 279, 1372, 315, 4115, 6439, 382, 14085, 198, 59, 1318, 90, 36, 14857, 92, 284, 220, 16, 17, 1124, 15136, 1124, 37018, 90, 20, 15170, 21, 92, 284, 1124, 37018, 90, 21, 15, 15170, 21, 92, 284, 220, 16, 15, 198, 14085, 271, 4416, 11, 467, 826, 15303, 400, 16, 15, 382, 820, 220, 16, 15, 151645, 198, 151643, 151643, 151643]
-1
-Trainer.tokenizer is now deprecated. You should use Trainer.processing_class instead.
-1
-Trainer.tokenizer is now deprecated. You should use Trainer.processing_class instead.
-3--------"user\nLet's think step by step. Output the final answer after '####'.\nJames writes a 3-page letter to 2 different friends twice a week.  How many pages does he write a year?\nassistant\nLet's break this down step by step:\n\n1. James writes a 3-page letter to **2 different friends**.\n   - So per letter-writing event: 3 pages × 2 friends = 6 pages.\n\n2. He does this **twice a week**.\n   - So per week: 6 pages × 2 = 12 pages.\n\n3. There are **52 weeks in a year**.\n   - So per year: 12 pages/week × 52 weeks = 624 pages.\n\n#### 624\n"-------torch.Size([168])-------torch.Size([168])-------torch.Size([168])-------[151644, 872, 198, 10061, 594, 1744, 3019, 553, 3019, 13, 9258, 279, 1590, 4226, 1283, 364, 820, 23569, 28084, 13914, 264, 220, 18, 15112, 6524, 311, 220, 17, 2155, 4780, 10917, 264, 2003, 13, 220, 2585, 1657, 6816, 1558, 566, 3270, 264, 1042, 30, 151645, 198, 151644, 77091, 198, 10061, 594, 1438, 419, 1495, 3019, 553, 3019, 1447, 16, 13, 7801, 13914, 264, 220, 18, 15112, 6524, 311, 3070, 17, 2155, 4780, 334, 624, 256, 481, 2055, 817, 6524, 96665, 1538, 25, 220, 18, 6816, 24768, 220, 17, 4780, 284, 220, 21, 6816, 382, 17, 13, 1260, 1558, 419, 3070, 15560, 558, 264, 2003, 334, 624, 256, 481, 2055, 817, 2003, 25, 220, 21, 6816, 24768, 220, 17, 284, 220, 16, 17, 6816, 382, 18, 13, 2619, 525, 3070, 20, 17, 5555, 304, 264, 1042, 334, 624, 256, 481, 2055, 817, 1042, 25, 220, 16, 17, 6816, 14, 10264, 24768, 220, 20, 17, 5555, 284, 220, 21, 17, 19, 6816, 382, 820, 220, 21, 17, 19, 151645, 198]
-2--------"user\nLet's think step by step. Output the final answer after '####'.\nNatalia sold clips to 48 of her friends in April, and then she sold half as many clips in May. How many clips did Natalia sell altogether in April and May?\nassistant\nLet's solve this step by step:\n\n1. In April, Natalia sold clips to 48 friends.  \n   So, number of clips sold in April = 48.\n\n2. In May, she sold half as many clips as in April.  \n   So, number of clips sold in May = ½ × 48 = 24.\n\n3. Total clips sold in April and May =  \n   48 (April) + 24 (May) = 72.\n\n#### 72\n"-------torch.Size([176])-------torch.Size([176])-------torch.Size([176])-------[151644, 872, 198, 10061, 594, 1744, 3019, 553, 3019, 13, 9258, 279, 1590, 4226, 1283, 364, 820, 23569, 45, 4212, 685, 6088, 26111, 311, 220, 19, 23, 315, 1059, 4780, 304, 5813, 11, 323, 1221, 1340, 6088, 4279, 438, 1657, 26111, 304, 3217, 13, 2585, 1657, 26111, 1521, 41601, 685, 4559, 30055, 304, 5813, 323, 3217, 30, 151645, 198, 151644, 77091, 198, 10061, 594, 11625, 419, 3019, 553, 3019, 1447, 16, 13, 758, 5813, 11, 41601, 685, 6088, 26111, 311, 220, 19, 23, 4780, 13, 2303, 256, 2055, 11, 1372, 315, 26111, 6088, 304, 5813, 284, 220, 19, 23, 382, 17, 13, 758, 3217, 11, 1340, 6088, 4279, 438, 1657, 26111, 438, 304, 5813, 13, 2303, 256, 2055, 11, 1372, 315, 26111, 6088, 304, 3217, 284, 220, 26062, 24768, 220, 19, 23, 284, 220, 17, 19, 382, 18, 13, 10657, 26111, 6088, 304, 5813, 323, 3217, 284, 2303, 256, 220, 19, 23, 320, 28046, 8, 488, 220, 17, 19, 320, 11109, 8, 284, 220, 22, 17, 382, 820, 220, 22, 17, 151645, 198, 151643, 151643, 151643]
-Saving model checkpoint to saves/qwen3-4b/test2/checkpoint-1
+bind fail
+bind success
+Loading checkpoint shards:   0%|          | 0/16 [00:00<?, ?it/s]Loading checkpoint shards:   6%|▋         | 1/16 [00:01<00:16,  1.11s/it]Loading checkpoint shards:  12%|█▎        | 2/16 [00:02<00:16,  1.15s/it]Loading checkpoint shards:  19%|█▉        | 3/16 [00:03<00:15,  1.19s/it]Loading checkpoint shards:  25%|██▌       | 4/16 [00:04<00:14,  1.18s/it]Loading checkpoint shards:  31%|███▏      | 5/16 [00:05<00:13,  1.18s/it]Loading checkpoint shards:  38%|███▊      | 6/16 [00:07<00:11,  1.18s/it]Loading checkpoint shards:  44%|████▍     | 7/16 [00:08<00:10,  1.17s/it]Loading checkpoint shards:  50%|█████     | 8/16 [00:09<00:09,  1.18s/it]Loading checkpoint shards:  56%|█████▋    | 9/16 [00:10<00:08,  1.19s/it]Loading checkpoint shards:  62%|██████▎   | 10/16 [00:11<00:07,  1.18s/it]Loading checkpoint shards:  69%|██████▉   | 11/16 [00:12<00:05,  1.18s/it]Loading checkpoint shards:  75%|███████▌  | 12/16 [00:14<00:04,  1.17s/it]Loading checkpoint shards:  81%|████████▏ | 13/16 [00:15<00:03,  1.17s/it]Loading checkpoint shards:  88%|████████▊ | 14/16 [00:16<00:02,  1.17s/it]Loading checkpoint shards:  94%|█████████▍| 15/16 [00:17<00:01,  1.17s/it]Loading checkpoint shards: 100%|██████████| 16/16 [00:17<00:00,  1.10it/s]Loading checkpoint shards: 100%|██████████| 16/16 [00:17<00:00,  1.12s/it]
+INFO:     Started server process [2036763]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8888 (Press CTRL+C to quit)
+compute: 2.84452223777771
+INFO:     127.0.0.1:57242 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.903531789779663
+INFO:     127.0.0.1:57244 - "POST /infer HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2036763]
+bind fail
+bind success
+Loading checkpoint shards:   0%|          | 0/16 [00:00<?, ?it/s]Loading checkpoint shards:   6%|▋         | 1/16 [00:01<00:16,  1.11s/it]Loading checkpoint shards:  12%|█▎        | 2/16 [00:02<00:15,  1.14s/it]Loading checkpoint shards:  19%|█▉        | 3/16 [00:03<00:15,  1.18s/it]Loading checkpoint shards:  25%|██▌       | 4/16 [00:04<00:14,  1.17s/it]Loading checkpoint shards:  31%|███▏      | 5/16 [00:05<00:12,  1.17s/it]Loading checkpoint shards:  38%|███▊      | 6/16 [00:06<00:11,  1.17s/it]Loading checkpoint shards:  44%|████▍     | 7/16 [00:08<00:10,  1.16s/it]Loading checkpoint shards:  50%|█████     | 8/16 [00:09<00:09,  1.17s/it]Loading checkpoint shards:  56%|█████▋    | 9/16 [00:10<00:08,  1.18s/it]Loading checkpoint shards:  62%|██████▎   | 10/16 [00:11<00:07,  1.18s/it]Loading checkpoint shards:  69%|██████▉   | 11/16 [00:12<00:05,  1.18s/it]Loading checkpoint shards:  75%|███████▌  | 12/16 [00:14<00:04,  1.17s/it]Loading checkpoint shards:  81%|████████▏ | 13/16 [00:15<00:03,  1.17s/it]Loading checkpoint shards:  88%|████████▊ | 14/16 [00:16<00:02,  1.17s/it]Loading checkpoint shards:  94%|█████████▍| 15/16 [00:17<00:01,  1.17s/it]Loading checkpoint shards: 100%|██████████| 16/16 [00:17<00:00,  1.11it/s]Loading checkpoint shards: 100%|██████████| 16/16 [00:17<00:00,  1.12s/it]
+INFO:     Started server process [2037863]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8888 (Press CTRL+C to quit)
+compute: 2.806551218032837
+INFO:     127.0.0.1:42586 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0304417610168457
+INFO:     127.0.0.1:42602 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8595056533813477
+INFO:     127.0.0.1:48844 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.9626481533050537
+INFO:     127.0.0.1:48858 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0406785011291504
+INFO:     127.0.0.1:33186 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8665125370025635
+INFO:     127.0.0.1:33198 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9107284545898438
+INFO:     127.0.0.1:46834 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9575672149658203
+INFO:     127.0.0.1:46838 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8595638275146484
+INFO:     127.0.0.1:46844 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.948547124862671
+INFO:     127.0.0.1:46850 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.890537977218628
+INFO:     127.0.0.1:48814 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.5342025756835938
+INFO:     127.0.0.1:48830 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.158936023712158
+INFO:     127.0.0.1:42512 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.175262451171875
+INFO:     127.0.0.1:42522 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1564197540283203
+INFO:     127.0.0.1:46838 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0332610607147217
+INFO:     127.0.0.1:46852 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.048924684524536
+INFO:     127.0.0.1:47268 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.874372959136963
+INFO:     127.0.0.1:47270 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1173200607299805
+INFO:     127.0.0.1:47286 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8259775638580322
+INFO:     127.0.0.1:47298 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8716189861297607
+INFO:     127.0.0.1:52296 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.5092413425445557
+INFO:     127.0.0.1:52298 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.892643690109253
+INFO:     127.0.0.1:37388 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8626012802124023
+INFO:     127.0.0.1:37402 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1562039852142334
+INFO:     127.0.0.1:37406 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8877849578857422
+INFO:     127.0.0.1:37412 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.933995246887207
+INFO:     127.0.0.1:33792 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.6247012615203857
+INFO:     127.0.0.1:33806 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9252839088439941
+INFO:     127.0.0.1:40324 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9271533489227295
+INFO:     127.0.0.1:40332 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9438536167144775
+INFO:     127.0.0.1:40338 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.335786819458008
+INFO:     127.0.0.1:40352 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9540486335754395
+INFO:     127.0.0.1:42526 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9046447277069092
+INFO:     127.0.0.1:42538 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9935312271118164
+INFO:     127.0.0.1:42548 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.18854022026062
+INFO:     127.0.0.1:42554 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8395867347717285
+INFO:     127.0.0.1:49984 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.155728578567505
+INFO:     127.0.0.1:50000 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0481112003326416
+INFO:     127.0.0.1:50002 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.7352864742279053
+INFO:     127.0.0.1:50016 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0160694122314453
+INFO:     127.0.0.1:60942 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1833841800689697
+INFO:     127.0.0.1:60944 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.235086441040039
+INFO:     127.0.0.1:39064 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2150087356567383
+INFO:     127.0.0.1:39074 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.024550199508667
+INFO:     127.0.0.1:39088 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2206082344055176
+INFO:     127.0.0.1:39104 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.953855037689209
+INFO:     127.0.0.1:53370 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1799709796905518
+INFO:     127.0.0.1:53380 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1444172859191895
+INFO:     127.0.0.1:53508 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.048003911972046
+INFO:     127.0.0.1:53522 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.829575538635254
+INFO:     127.0.0.1:53528 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0930941104888916
+INFO:     127.0.0.1:53530 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9957127571105957
+INFO:     127.0.0.1:51130 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.7634844779968262
+INFO:     127.0.0.1:51142 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1406729221343994
+INFO:     127.0.0.1:51156 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.6715943813323975
+INFO:     127.0.0.1:51170 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1253068447113037
+INFO:     127.0.0.1:53016 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.847290277481079
+INFO:     127.0.0.1:53032 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0530035495758057
+INFO:     127.0.0.1:41254 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.903977870941162
+INFO:     127.0.0.1:41268 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9243252277374268
+INFO:     127.0.0.1:41276 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.103550434112549
+INFO:     127.0.0.1:41288 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8981361389160156
+INFO:     127.0.0.1:53180 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.852076530456543
+INFO:     127.0.0.1:53196 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.810171365737915
+INFO:     127.0.0.1:37962 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.052234172821045
+INFO:     127.0.0.1:37972 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.103386402130127
+INFO:     127.0.0.1:48620 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9334909915924072
+INFO:     127.0.0.1:48622 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9290273189544678
+INFO:     127.0.0.1:48630 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.052910089492798
+INFO:     127.0.0.1:48636 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1065659523010254
+INFO:     127.0.0.1:48534 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.029996156692505
+INFO:     127.0.0.1:48536 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0019490718841553
+INFO:     127.0.0.1:56404 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1555864810943604
+INFO:     127.0.0.1:56412 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9464716911315918
+INFO:     127.0.0.1:56420 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8195853233337402
+INFO:     127.0.0.1:56436 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.957552433013916
+INFO:     127.0.0.1:43342 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.541428327560425
+INFO:     127.0.0.1:43350 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9547069072723389
+INFO:     127.0.0.1:53918 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.7974467277526855
+INFO:     127.0.0.1:53922 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9464070796966553
+INFO:     127.0.0.1:53936 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.173699140548706
+INFO:     127.0.0.1:53952 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8356971740722656
+INFO:     127.0.0.1:45754 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.3010525703430176
+INFO:     127.0.0.1:45756 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.87711501121521
+INFO:     127.0.0.1:45766 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8402893543243408
+INFO:     127.0.0.1:45774 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.035196542739868
+INFO:     127.0.0.1:33560 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.133387327194214
+INFO:     127.0.0.1:33566 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9923949241638184
+INFO:     127.0.0.1:33574 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2292287349700928
+INFO:     127.0.0.1:33580 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.937504768371582
+INFO:     127.0.0.1:41174 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8868322372436523
+INFO:     127.0.0.1:41178 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9044725894927979
+INFO:     127.0.0.1:36924 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0622787475585938
+INFO:     127.0.0.1:36940 - "POST /infer HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2037863]
+bind fail
+bind success
+Loading checkpoint shards:   0%|          | 0/16 [00:00<?, ?it/s]Loading checkpoint shards:   6%|▋         | 1/16 [00:01<00:15,  1.07s/it]Loading checkpoint shards:  12%|█▎        | 2/16 [00:02<00:15,  1.09s/it]Loading checkpoint shards:  19%|█▉        | 3/16 [00:03<00:14,  1.13s/it]Loading checkpoint shards:  25%|██▌       | 4/16 [00:04<00:13,  1.13s/it]Loading checkpoint shards:  31%|███▏      | 5/16 [00:05<00:12,  1.13s/it]Loading checkpoint shards:  38%|███▊      | 6/16 [00:06<00:11,  1.12s/it]Loading checkpoint shards:  44%|████▍     | 7/16 [00:07<00:10,  1.12s/it]Loading checkpoint shards:  50%|█████     | 8/16 [00:08<00:09,  1.13s/it]Loading checkpoint shards:  56%|█████▋    | 9/16 [00:10<00:07,  1.14s/it]Loading checkpoint shards:  62%|██████▎   | 10/16 [00:11<00:06,  1.13s/it]Loading checkpoint shards:  69%|██████▉   | 11/16 [00:12<00:05,  1.13s/it]Loading checkpoint shards:  75%|███████▌  | 12/16 [00:13<00:04,  1.13s/it]Loading checkpoint shards:  81%|████████▏ | 13/16 [00:14<00:03,  1.12s/it]Loading checkpoint shards:  88%|████████▊ | 14/16 [00:15<00:02,  1.12s/it]Loading checkpoint shards:  94%|█████████▍| 15/16 [00:16<00:01,  1.12s/it]Loading checkpoint shards: 100%|██████████| 16/16 [00:17<00:00,  1.16it/s]Loading checkpoint shards: 100%|██████████| 16/16 [00:17<00:00,  1.07s/it]
+INFO:     Started server process [2039817]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8888 (Press CTRL+C to quit)
+compute: 4.1289451122283936
+INFO:     127.0.0.1:36894 - "POST /infer HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2039817]
+bind fail
+bind success
+Loading checkpoint shards:   0%|          | 0/16 [00:00<?, ?it/s]Loading checkpoint shards:   6%|▋         | 1/16 [00:01<00:16,  1.08s/it]Loading checkpoint shards:  12%|█▎        | 2/16 [00:02<00:15,  1.11s/it]Loading checkpoint shards:  19%|█▉        | 3/16 [00:03<00:14,  1.15s/it]Loading checkpoint shards:  25%|██▌       | 4/16 [00:04<00:13,  1.15s/it]Loading checkpoint shards:  31%|███▏      | 5/16 [00:05<00:12,  1.15s/it]Loading checkpoint shards:  38%|███▊      | 6/16 [00:06<00:11,  1.14s/it]Loading checkpoint shards:  44%|████▍     | 7/16 [00:07<00:10,  1.14s/it]Loading checkpoint shards:  50%|█████     | 8/16 [00:09<00:09,  1.15s/it]Loading checkpoint shards:  56%|█████▋    | 9/16 [00:10<00:08,  1.16s/it]Loading checkpoint shards:  62%|██████▎   | 10/16 [00:11<00:06,  1.16s/it]Loading checkpoint shards:  69%|██████▉   | 11/16 [00:12<00:05,  1.15s/it]Loading checkpoint shards:  75%|███████▌  | 12/16 [00:13<00:04,  1.15s/it]Loading checkpoint shards:  81%|████████▏ | 13/16 [00:14<00:03,  1.14s/it]Loading checkpoint shards:  88%|████████▊ | 14/16 [00:16<00:02,  1.14s/it]Loading checkpoint shards:  94%|█████████▍| 15/16 [00:17<00:01,  1.14s/it]Loading checkpoint shards: 100%|██████████| 16/16 [00:17<00:00,  1.14it/s]Loading checkpoint shards: 100%|██████████| 16/16 [00:17<00:00,  1.09s/it]
+INFO:     Started server process [2041011]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8888 (Press CTRL+C to quit)
+compute: 4.113280773162842
+INFO:     127.0.0.1:42032 - "POST /infer HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2041011]
+bind fail
+bind success
+Loading checkpoint shards:   0%|          | 0/16 [00:00<?, ?it/s]Loading checkpoint shards:   6%|▋         | 1/16 [00:01<00:16,  1.10s/it]Loading checkpoint shards:  12%|█▎        | 2/16 [00:02<00:15,  1.14s/it]Loading checkpoint shards:  19%|█▉        | 3/16 [00:03<00:15,  1.18s/it]Loading checkpoint shards:  25%|██▌       | 4/16 [00:04<00:14,  1.18s/it]Loading checkpoint shards:  31%|███▏      | 5/16 [00:05<00:12,  1.18s/it]Loading checkpoint shards:  38%|███▊      | 6/16 [00:06<00:11,  1.17s/it]Loading checkpoint shards:  44%|████▍     | 7/16 [00:08<00:10,  1.16s/it]Loading checkpoint shards:  50%|█████     | 8/16 [00:09<00:09,  1.17s/it]Loading checkpoint shards:  56%|█████▋    | 9/16 [00:10<00:08,  1.18s/it]Loading checkpoint shards:  62%|██████▎   | 10/16 [00:11<00:07,  1.18s/it]Loading checkpoint shards:  69%|██████▉   | 11/16 [00:12<00:05,  1.18s/it]Loading checkpoint shards:  75%|███████▌  | 12/16 [00:14<00:04,  1.17s/it]Loading checkpoint shards:  81%|████████▏ | 13/16 [00:15<00:03,  1.17s/it]Loading checkpoint shards:  88%|████████▊ | 14/16 [00:16<00:02,  1.17s/it]Loading checkpoint shards:  94%|█████████▍| 15/16 [00:17<00:01,  1.17s/it]Loading checkpoint shards: 100%|██████████| 16/16 [00:17<00:00,  1.11it/s]Loading checkpoint shards: 100%|██████████| 16/16 [00:17<00:00,  1.11s/it]
+INFO:     Started server process [2042257]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8888 (Press CTRL+C to quit)
+compute: 2.8075356483459473
+INFO:     127.0.0.1:41312 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.03495717048645
+INFO:     127.0.0.1:41328 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8958804607391357
+INFO:     127.0.0.1:40696 - "POST /infer HTTP/1.1" 200 OK
+compute: 4.044591665267944
+INFO:     127.0.0.1:40710 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9329030513763428
+INFO:     127.0.0.1:54766 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9509727954864502
+INFO:     127.0.0.1:54778 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.019832134246826
+INFO:     127.0.0.1:37308 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.909348487854004
+INFO:     127.0.0.1:37322 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9203543663024902
+INFO:     127.0.0.1:35544 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9625310897827148
+INFO:     127.0.0.1:35554 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.939972400665283
+INFO:     127.0.0.1:35570 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.540587902069092
+INFO:     127.0.0.1:35580 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.11633038520813
+INFO:     127.0.0.1:57600 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0369443893432617
+INFO:     127.0.0.1:57608 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.144214391708374
+INFO:     127.0.0.1:33964 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0324485301971436
+INFO:     127.0.0.1:33968 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.850698471069336
+INFO:     127.0.0.1:33982 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9706218242645264
+INFO:     127.0.0.1:33984 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.872852087020874
+INFO:     127.0.0.1:41588 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0604405403137207
+INFO:     127.0.0.1:41602 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8702645301818848
+INFO:     127.0.0.1:40306 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.5372695922851562
+INFO:     127.0.0.1:40316 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.870567798614502
+INFO:     127.0.0.1:39824 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8495495319366455
+INFO:     127.0.0.1:39832 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8513381481170654
+INFO:     127.0.0.1:39848 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0558509826660156
+INFO:     127.0.0.1:39862 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.914062738418579
+INFO:     127.0.0.1:58282 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.6203975677490234
+INFO:     127.0.0.1:58296 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9270257949829102
+INFO:     127.0.0.1:40784 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9395112991333008
+INFO:     127.0.0.1:40798 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9861571788787842
+INFO:     127.0.0.1:58162 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.3583595752716064
+INFO:     127.0.0.1:58178 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9375219345092773
+INFO:     127.0.0.1:58186 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8954081535339355
+INFO:     127.0.0.1:58190 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9890704154968262
+INFO:     127.0.0.1:43238 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1584713459014893
+INFO:     127.0.0.1:43242 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8600592613220215
+INFO:     127.0.0.1:39756 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.160364866256714
+INFO:     127.0.0.1:39758 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.794743299484253
+INFO:     127.0.0.1:41610 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9968397617340088
+INFO:     127.0.0.1:41618 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.982309103012085
+INFO:     127.0.0.1:41628 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0935542583465576
+INFO:     127.0.0.1:41632 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.211488962173462
+INFO:     127.0.0.1:36364 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2118985652923584
+INFO:     127.0.0.1:36378 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0294461250305176
+INFO:     127.0.0.1:47312 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2248313426971436
+INFO:     127.0.0.1:47314 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9599320888519287
+INFO:     127.0.0.1:47320 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1823558807373047
+INFO:     127.0.0.1:47334 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0995876789093018
+INFO:     127.0.0.1:48564 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0766255855560303
+INFO:     127.0.0.1:48568 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8401813507080078
+INFO:     127.0.0.1:49144 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.110255002975464
+INFO:     127.0.0.1:49146 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.7983407974243164
+INFO:     127.0.0.1:52810 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9413530826568604
+INFO:     127.0.0.1:52820 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.115723133087158
+INFO:     127.0.0.1:52834 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.6488683223724365
+INFO:     127.0.0.1:52850 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.865849256515503
+INFO:     127.0.0.1:53992 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.044534206390381
+INFO:     127.0.0.1:53996 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9537177085876465
+INFO:     127.0.0.1:33178 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9825770854949951
+INFO:     127.0.0.1:33184 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8564929962158203
+INFO:     127.0.0.1:46424 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0323402881622314
+INFO:     127.0.0.1:46430 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.838796615600586
+INFO:     127.0.0.1:46432 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.7937402725219727
+INFO:     127.0.0.1:46446 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.782775640487671
+INFO:     127.0.0.1:59230 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0199663639068604
+INFO:     127.0.0.1:59240 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9803338050842285
+INFO:     127.0.0.1:59774 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.026012897491455
+INFO:     127.0.0.1:59788 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8883936405181885
+INFO:     127.0.0.1:59796 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.025482416152954
+INFO:     127.0.0.1:59802 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.105381965637207
+INFO:     127.0.0.1:41328 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0241196155548096
+INFO:     127.0.0.1:41344 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9560754299163818
+INFO:     127.0.0.1:39112 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1240804195404053
+INFO:     127.0.0.1:39114 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.837430715560913
+INFO:     127.0.0.1:39122 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8695921897888184
+INFO:     127.0.0.1:39136 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.941321611404419
+INFO:     127.0.0.1:43768 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.504359006881714
+INFO:     127.0.0.1:43784 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9222464561462402
+INFO:     127.0.0.1:38002 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.7719991207122803
+INFO:     127.0.0.1:38014 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9146339893341064
+INFO:     127.0.0.1:51106 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1426761150360107
+INFO:     127.0.0.1:51122 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8794136047363281
+INFO:     127.0.0.1:51128 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.3049726486206055
+INFO:     127.0.0.1:51130 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8480088710784912
+INFO:     127.0.0.1:44938 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8029847145080566
+INFO:     127.0.0.1:44940 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.044224262237549
+INFO:     127.0.0.1:47820 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1388583183288574
+INFO:     127.0.0.1:47834 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9783751964569092
+INFO:     127.0.0.1:57232 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2428171634674072
+INFO:     127.0.0.1:57244 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9369826316833496
+INFO:     127.0.0.1:57246 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9336352348327637
+INFO:     127.0.0.1:57248 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.119396686553955
+INFO:     127.0.0.1:56260 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.918571949005127
+INFO:     127.0.0.1:56264 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8917515277862549
+INFO:     127.0.0.1:40952 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8953957557678223
+INFO:     127.0.0.1:40960 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9389996528625488
+INFO:     127.0.0.1:40970 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.994307041168213
+INFO:     127.0.0.1:40986 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0222578048706055
+INFO:     127.0.0.1:41380 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.5847179889678955
+INFO:     127.0.0.1:41390 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9772801399230957
+INFO:     127.0.0.1:43400 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.0182878971099854
+INFO:     127.0.0.1:43406 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9990370273590088
+INFO:     127.0.0.1:39078 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9197475910186768
+INFO:     127.0.0.1:39080 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2825300693511963
+INFO:     127.0.0.1:58406 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1704585552215576
+INFO:     127.0.0.1:58416 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1463449001312256
+INFO:     127.0.0.1:58432 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.6184866428375244
+INFO:     127.0.0.1:58440 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8256051540374756
+INFO:     127.0.0.1:57004 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8202543258666992
+INFO:     127.0.0.1:57008 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.7667593955993652
+INFO:     127.0.0.1:33920 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8306379318237305
+INFO:     127.0.0.1:33934 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1619246006011963
+INFO:     127.0.0.1:33936 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.337522268295288
+INFO:     127.0.0.1:33938 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8525135517120361
+INFO:     127.0.0.1:38674 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2896435260772705
+INFO:     127.0.0.1:38682 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9962835311889648
+INFO:     127.0.0.1:42950 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.567746639251709
+INFO:     127.0.0.1:42956 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0275559425354004
+INFO:     127.0.0.1:34712 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9239532947540283
+INFO:     127.0.0.1:34722 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.896277904510498
+INFO:     127.0.0.1:38186 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.012892246246338
+INFO:     127.0.0.1:38188 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8679389953613281
+INFO:     127.0.0.1:38190 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0088841915130615
+INFO:     127.0.0.1:38194 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8828129768371582
+INFO:     127.0.0.1:38934 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.014244556427002
+INFO:     127.0.0.1:38948 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9790918827056885
+INFO:     127.0.0.1:56678 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1343700885772705
+INFO:     127.0.0.1:56684 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.969205617904663
+INFO:     127.0.0.1:39066 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.3360488414764404
+INFO:     127.0.0.1:39070 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8817262649536133
+INFO:     127.0.0.1:46170 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1411497592926025
+INFO:     127.0.0.1:46186 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9547770023345947
+INFO:     127.0.0.1:59204 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.179220676422119
+INFO:     127.0.0.1:59214 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8973307609558105
+INFO:     127.0.0.1:59230 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.438656806945801
+INFO:     127.0.0.1:59234 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.131939172744751
+INFO:     127.0.0.1:50440 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.300644874572754
+INFO:     127.0.0.1:50456 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8622381687164307
+INFO:     127.0.0.1:40408 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2124693393707275
+INFO:     127.0.0.1:40420 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.96099853515625
+INFO:     127.0.0.1:35844 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.225529432296753
+INFO:     127.0.0.1:35852 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9407062530517578
+INFO:     127.0.0.1:48508 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8444879055023193
+INFO:     127.0.0.1:48514 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8736720085144043
+INFO:     127.0.0.1:48524 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.803471326828003
+INFO:     127.0.0.1:48534 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9391212463378906
+INFO:     127.0.0.1:45810 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9266119003295898
+INFO:     127.0.0.1:45826 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8563175201416016
+INFO:     127.0.0.1:45828 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8973393440246582
+INFO:     127.0.0.1:45840 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9127421379089355
+INFO:     127.0.0.1:44358 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9464313983917236
+INFO:     127.0.0.1:44370 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.7988364696502686
+INFO:     127.0.0.1:59520 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.258075475692749
+INFO:     127.0.0.1:59522 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8603854179382324
+INFO:     127.0.0.1:59536 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9881093502044678
+INFO:     127.0.0.1:59546 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8189914226531982
+INFO:     127.0.0.1:37104 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.051003932952881
+INFO:     127.0.0.1:37120 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.827467918395996
+INFO:     127.0.0.1:41862 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8714866638183594
+INFO:     127.0.0.1:41878 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8690950870513916
+INFO:     127.0.0.1:41894 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8726799488067627
+INFO:     127.0.0.1:41904 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9364967346191406
+INFO:     127.0.0.1:46490 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2419285774230957
+INFO:     127.0.0.1:46504 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8640730381011963
+INFO:     127.0.0.1:46694 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8609328269958496
+INFO:     127.0.0.1:46700 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9073121547698975
+INFO:     127.0.0.1:46706 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.913170576095581
+INFO:     127.0.0.1:46720 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.071185350418091
+INFO:     127.0.0.1:54600 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.126246929168701
+INFO:     127.0.0.1:54604 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8319523334503174
+INFO:     127.0.0.1:53154 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8676071166992188
+INFO:     127.0.0.1:53162 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.993842363357544
+INFO:     127.0.0.1:53172 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2416248321533203
+INFO:     127.0.0.1:53174 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8677446842193604
+INFO:     127.0.0.1:52652 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.7496116161346436
+INFO:     127.0.0.1:52664 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9732389450073242
+INFO:     127.0.0.1:41598 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.228860855102539
+INFO:     127.0.0.1:41606 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9647254943847656
+INFO:     127.0.0.1:47502 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0553619861602783
+INFO:     127.0.0.1:47506 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.6968474388122559
+INFO:     127.0.0.1:46680 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.148193836212158
+INFO:     127.0.0.1:46696 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.75669264793396
+INFO:     127.0.0.1:46698 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.4535529613494873
+INFO:     127.0.0.1:57930 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.912170171737671
+INFO:     127.0.0.1:56540 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.229346990585327
+INFO:     127.0.0.1:56556 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9802446365356445
+INFO:     127.0.0.1:49592 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.2025253772735596
+INFO:     127.0.0.1:49602 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8565013408660889
+INFO:     127.0.0.1:43358 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9210467338562012
+INFO:     127.0.0.1:43364 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9318287372589111
+INFO:     127.0.0.1:58508 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.195132255554199
+INFO:     127.0.0.1:58518 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.012575387954712
+INFO:     127.0.0.1:46026 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.055814027786255
+INFO:     127.0.0.1:46028 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9617030620574951
+INFO:     127.0.0.1:45994 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.5092475414276123
+INFO:     127.0.0.1:46010 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0315699577331543
+INFO:     127.0.0.1:42800 - "POST /infer HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2042257]
+bind success
+Loading checkpoint shards:   0%|          | 0/16 [00:00<?, ?it/s]Loading checkpoint shards:   6%|▋         | 1/16 [00:01<00:16,  1.10s/it]Loading checkpoint shards:  12%|█▎        | 2/16 [00:02<00:15,  1.13s/it]Loading checkpoint shards:  19%|█▉        | 3/16 [00:03<00:15,  1.17s/it]Loading checkpoint shards:  25%|██▌       | 4/16 [00:04<00:14,  1.17s/it]Loading checkpoint shards:  31%|███▏      | 5/16 [00:05<00:12,  1.17s/it]Loading checkpoint shards:  38%|███▊      | 6/16 [00:06<00:11,  1.16s/it]Loading checkpoint shards:  44%|████▍     | 7/16 [00:08<00:10,  1.15s/it]Loading checkpoint shards:  50%|█████     | 8/16 [00:09<00:09,  1.17s/it]Loading checkpoint shards:  56%|█████▋    | 9/16 [00:10<00:08,  1.18s/it]Loading checkpoint shards:  62%|██████▎   | 10/16 [00:11<00:07,  1.18s/it]Loading checkpoint shards:  69%|██████▉   | 11/16 [00:12<00:05,  1.17s/it]Loading checkpoint shards:  75%|███████▌  | 12/16 [00:13<00:04,  1.17s/it]Loading checkpoint shards:  81%|████████▏ | 13/16 [00:15<00:03,  1.17s/it]Loading checkpoint shards:  88%|████████▊ | 14/16 [00:16<00:02,  1.16s/it]Loading checkpoint shards:  94%|█████████▍| 15/16 [00:17<00:01,  1.17s/it]Loading checkpoint shards: 100%|██████████| 16/16 [00:17<00:00,  1.11it/s]Loading checkpoint shards: 100%|██████████| 16/16 [00:17<00:00,  1.11s/it]
+INFO:     Started server process [2045469]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8888 (Press CTRL+C to quit)
+compute: 2.796900749206543
+INFO:     127.0.0.1:44138 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0771484375
+INFO:     127.0.0.1:41720 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8964080810546875
+INFO:     127.0.0.1:41734 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.3357303142547607
+INFO:     127.0.0.1:45332 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9625587463378906
+INFO:     127.0.0.1:51662 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9284684658050537
+INFO:     127.0.0.1:51672 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0266454219818115
+INFO:     127.0.0.1:51676 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.999847412109375
+INFO:     127.0.0.1:49296 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0676565170288086
+INFO:     127.0.0.1:49298 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8804676532745361
+INFO:     127.0.0.1:60778 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.9893722534179688
+INFO:     127.0.0.1:60792 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.8165814876556396
+INFO:     127.0.0.1:34694 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9627435207366943
+INFO:     127.0.0.1:33264 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0820014476776123
+INFO:     127.0.0.1:33268 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.109370470046997
+INFO:     127.0.0.1:53262 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1781885623931885
+INFO:     127.0.0.1:53278 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8391575813293457
+INFO:     127.0.0.1:57954 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.018486976623535
+INFO:     127.0.0.1:57962 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8577706813812256
+INFO:     127.0.0.1:57976 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.11307430267334
+INFO:     127.0.0.1:44084 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.911463737487793
+INFO:     127.0.0.1:44094 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8830525875091553
+INFO:     127.0.0.1:54806 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8949668407440186
+INFO:     127.0.0.1:54814 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9118165969848633
+INFO:     127.0.0.1:58476 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8651490211486816
+INFO:     127.0.0.1:58486 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0962636470794678
+INFO:     127.0.0.1:45908 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9436442852020264
+INFO:     127.0.0.1:45918 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.665147542953491
+INFO:     127.0.0.1:45926 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.916031837463379
+INFO:     127.0.0.1:58660 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.018951654434204
+INFO:     127.0.0.1:50926 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.5509774684906006
+INFO:     127.0.0.1:50942 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9691946506500244
+INFO:     127.0.0.1:50948 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.913045883178711
+INFO:     127.0.0.1:35198 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9921181201934814
+INFO:     127.0.0.1:53186 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.08306622505188
+INFO:     127.0.0.1:53202 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9860961437225342
+INFO:     127.0.0.1:53210 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8379383087158203
+INFO:     127.0.0.1:45652 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.198958396911621
+INFO:     127.0.0.1:45666 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8411295413970947
+INFO:     127.0.0.1:43126 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0066843032836914
+INFO:     127.0.0.1:43142 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.219561815261841
+INFO:     127.0.0.1:43154 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0189313888549805
+INFO:     127.0.0.1:38922 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.3865668773651123
+INFO:     127.0.0.1:38930 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2491352558135986
+INFO:     127.0.0.1:45044 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.06539249420166
+INFO:     127.0.0.1:45060 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.6989736557006836
+INFO:     127.0.0.1:46496 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9829120635986328
+INFO:     127.0.0.1:53286 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2277469635009766
+INFO:     127.0.0.1:53294 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.111189365386963
+INFO:     127.0.0.1:53308 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1497647762298584
+INFO:     127.0.0.1:35356 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.6012980937957764
+INFO:     127.0.0.1:35368 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8370330333709717
+INFO:     127.0.0.1:36076 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8095557689666748
+INFO:     127.0.0.1:36086 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9958665370941162
+INFO:     127.0.0.1:57412 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1630218029022217
+INFO:     127.0.0.1:57416 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.7822275161743164
+INFO:     127.0.0.1:49174 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.144083261489868
+INFO:     127.0.0.1:49184 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9033267498016357
+INFO:     127.0.0.1:56010 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9819953441619873
+INFO:     127.0.0.1:56016 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0645036697387695
+INFO:     127.0.0.1:47414 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0588724613189697
+INFO:     127.0.0.1:47424 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8820068836212158
+INFO:     127.0.0.1:47432 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9049324989318848
+INFO:     127.0.0.1:36736 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.944356918334961
+INFO:     127.0.0.1:36748 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0557944774627686
+INFO:     127.0.0.1:44774 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8593764305114746
+INFO:     127.0.0.1:44780 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0509865283966064
+INFO:     127.0.0.1:46086 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.143467664718628
+INFO:     127.0.0.1:46102 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1754086017608643
+INFO:     127.0.0.1:49526 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.946730375289917
+INFO:     127.0.0.1:49536 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1142401695251465
+INFO:     127.0.0.1:49552 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1592025756835938
+INFO:     127.0.0.1:45236 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2651824951171875
+INFO:     127.0.0.1:45250 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.017812967300415
+INFO:     127.0.0.1:39554 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.912231683731079
+INFO:     127.0.0.1:39558 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.003437042236328
+INFO:     127.0.0.1:39570 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0127720832824707
+INFO:     127.0.0.1:47216 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.750736951828003
+INFO:     127.0.0.1:47232 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9648025035858154
+INFO:     127.0.0.1:40530 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9120500087738037
+INFO:     127.0.0.1:40544 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9827985763549805
+INFO:     127.0.0.1:41190 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.184953212738037
+INFO:     127.0.0.1:41192 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.29702091217041
+INFO:     127.0.0.1:35654 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9190618991851807
+INFO:     127.0.0.1:35670 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9072129726409912
+INFO:     127.0.0.1:35682 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8403444290161133
+INFO:     127.0.0.1:35174 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1772191524505615
+INFO:     127.0.0.1:35180 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0846965312957764
+INFO:     127.0.0.1:50940 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.011842727661133
+INFO:     127.0.0.1:50946 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.3287038803100586
+INFO:     127.0.0.1:50956 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.951747179031372
+INFO:     127.0.0.1:40548 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.029564380645752
+INFO:     127.0.0.1:40564 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.074934244155884
+INFO:     127.0.0.1:54164 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.01296329498291
+INFO:     127.0.0.1:54168 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9562363624572754
+INFO:     127.0.0.1:58804 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9093379974365234
+INFO:     127.0.0.1:58820 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9742085933685303
+INFO:     127.0.0.1:33034 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.093510389328003
+INFO:     127.0.0.1:33050 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.065373182296753
+INFO:     127.0.0.1:33062 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.347703695297241
+INFO:     127.0.0.1:34774 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9915380477905273
+INFO:     127.0.0.1:34776 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.1672523021698
+INFO:     127.0.0.1:54054 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9607081413269043
+INFO:     127.0.0.1:39576 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.956822395324707
+INFO:     127.0.0.1:39580 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0122926235198975
+INFO:     127.0.0.1:46774 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.075028419494629
+INFO:     127.0.0.1:46782 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.130472421646118
+INFO:     127.0.0.1:46792 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.895484447479248
+INFO:     127.0.0.1:43696 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.851414680480957
+INFO:     127.0.0.1:43702 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9040403366088867
+INFO:     127.0.0.1:37408 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8784561157226562
+INFO:     127.0.0.1:37416 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8473427295684814
+INFO:     127.0.0.1:37426 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.322197198867798
+INFO:     127.0.0.1:58700 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2184975147247314
+INFO:     127.0.0.1:58714 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.895430564880371
+INFO:     127.0.0.1:59472 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1964333057403564
+INFO:     127.0.0.1:59478 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0321829319000244
+INFO:     127.0.0.1:34884 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.544555425643921
+INFO:     127.0.0.1:34886 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9855916500091553
+INFO:     127.0.0.1:53384 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0440542697906494
+INFO:     127.0.0.1:53390 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.824230670928955
+INFO:     127.0.0.1:53396 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0741941928863525
+INFO:     127.0.0.1:59282 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.888535499572754
+INFO:     127.0.0.1:59298 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.04758358001709
+INFO:     127.0.0.1:47986 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.10239315032959
+INFO:     127.0.0.1:47992 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9141430854797363
+INFO:     127.0.0.1:47998 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9923319816589355
+INFO:     127.0.0.1:49750 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.207094430923462
+INFO:     127.0.0.1:49754 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.1198017597198486
+INFO:     127.0.0.1:39466 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0052149295806885
+INFO:     127.0.0.1:49024 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2016983032226562
+INFO:     127.0.0.1:49040 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8814456462860107
+INFO:     127.0.0.1:36172 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.176629066467285
+INFO:     127.0.0.1:36188 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.00612735748291
+INFO:     127.0.0.1:47602 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.97027587890625
+INFO:     127.0.0.1:47608 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.273406982421875
+INFO:     127.0.0.1:49284 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.359686851501465
+INFO:     127.0.0.1:49288 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.3907368183135986
+INFO:     127.0.0.1:53392 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.198575496673584
+INFO:     127.0.0.1:53396 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9403760433197021
+INFO:     127.0.0.1:44046 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.293337345123291
+INFO:     127.0.0.1:44060 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0167107582092285
+INFO:     127.0.0.1:38268 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9703240394592285
+INFO:     127.0.0.1:38278 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0179381370544434
+INFO:     127.0.0.1:38280 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9457125663757324
+INFO:     127.0.0.1:39612 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8773140907287598
+INFO:     127.0.0.1:39616 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0273756980895996
+INFO:     127.0.0.1:39632 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9999914169311523
+INFO:     127.0.0.1:33792 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.887159824371338
+INFO:     127.0.0.1:33808 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9377059936523438
+INFO:     127.0.0.1:43918 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0837669372558594
+INFO:     127.0.0.1:43932 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0874855518341064
+INFO:     127.0.0.1:43934 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9505441188812256
+INFO:     127.0.0.1:42410 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.3656699657440186
+INFO:     127.0.0.1:42426 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9678034782409668
+INFO:     127.0.0.1:50902 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.125340461730957
+INFO:     127.0.0.1:50918 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9244661331176758
+INFO:     127.0.0.1:39116 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1604418754577637
+INFO:     127.0.0.1:39126 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.973212718963623
+INFO:     127.0.0.1:39130 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8994221687316895
+INFO:     127.0.0.1:37630 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9745137691497803
+INFO:     127.0.0.1:49028 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9699082374572754
+INFO:     127.0.0.1:49032 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.455287456512451
+INFO:     127.0.0.1:49044 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.951538324356079
+INFO:     127.0.0.1:60044 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9808475971221924
+INFO:     127.0.0.1:60048 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9665026664733887
+INFO:     127.0.0.1:60052 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9283084869384766
+INFO:     127.0.0.1:60066 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0232386589050293
+INFO:     127.0.0.1:60080 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2514564990997314
+INFO:     127.0.0.1:51530 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.235450029373169
+INFO:     127.0.0.1:51532 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9472649097442627
+INFO:     127.0.0.1:44432 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8117573261260986
+INFO:     127.0.0.1:44434 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.291928291320801
+INFO:     127.0.0.1:50526 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.101235866546631
+INFO:     127.0.0.1:50536 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.918459415435791
+INFO:     127.0.0.1:50540 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.829897403717041
+INFO:     127.0.0.1:42338 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.3892300128936768
+INFO:     127.0.0.1:32940 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9950048923492432
+INFO:     127.0.0.1:32954 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.008587598800659
+INFO:     127.0.0.1:49952 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.163928985595703
+INFO:     127.0.0.1:49966 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.7422292232513428
+INFO:     127.0.0.1:57570 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2071754932403564
+INFO:     127.0.0.1:57586 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.514465808868408
+INFO:     127.0.0.1:57596 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.837132215499878
+INFO:     127.0.0.1:43654 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.3498504161834717
+INFO:     127.0.0.1:43666 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9519202709197998
+INFO:     127.0.0.1:56488 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.037238121032715
+INFO:     127.0.0.1:56494 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.2862050533294678
+INFO:     127.0.0.1:56504 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0172922611236572
+INFO:     127.0.0.1:40362 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8898515701293945
+INFO:     127.0.0.1:40378 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9523370265960693
+INFO:     127.0.0.1:40392 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.3072144985198975
+INFO:     127.0.0.1:54936 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0345895290374756
+INFO:     127.0.0.1:47852 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1303534507751465
+INFO:     127.0.0.1:47864 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.11958384513855
+INFO:     127.0.0.1:47866 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9862425327301025
+INFO:     127.0.0.1:52388 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.054297685623169
+INFO:     127.0.0.1:52398 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.3742194175720215
+INFO:     127.0.0.1:60566 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8273229598999023
+INFO:     127.0.0.1:60582 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8439967632293701
+INFO:     127.0.0.1:56574 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8326478004455566
+INFO:     127.0.0.1:56590 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.145559549331665
+INFO:     127.0.0.1:56604 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.030447006225586
+INFO:     127.0.0.1:50066 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.205493688583374
+INFO:     127.0.0.1:50076 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0491161346435547
+INFO:     127.0.0.1:45798 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9793791770935059
+INFO:     127.0.0.1:45814 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.994760513305664
+INFO:     127.0.0.1:45824 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1727545261383057
+INFO:     127.0.0.1:48028 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.033113718032837
+INFO:     127.0.0.1:48044 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8991539478302002
+INFO:     127.0.0.1:45276 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8891026973724365
+INFO:     127.0.0.1:45280 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.089526653289795
+INFO:     127.0.0.1:45284 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.838510274887085
+INFO:     127.0.0.1:43786 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8964333534240723
+INFO:     127.0.0.1:58328 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9765818119049072
+INFO:     127.0.0.1:58334 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9871423244476318
+INFO:     127.0.0.1:58342 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.978409767150879
+INFO:     127.0.0.1:32910 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.077993869781494
+INFO:     127.0.0.1:32920 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9687588214874268
+INFO:     127.0.0.1:57836 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0941245555877686
+INFO:     127.0.0.1:57846 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9331469535827637
+INFO:     127.0.0.1:57858 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.072274684906006
+INFO:     127.0.0.1:51546 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0032575130462646
+INFO:     127.0.0.1:51548 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9584944248199463
+INFO:     127.0.0.1:39460 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.4916114807128906
+INFO:     127.0.0.1:39472 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9714393615722656
+INFO:     127.0.0.1:57910 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9951343536376953
+INFO:     127.0.0.1:57912 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1601133346557617
+INFO:     127.0.0.1:48716 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0616378784179688
+INFO:     127.0.0.1:48718 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2769525051116943
+INFO:     127.0.0.1:42370 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.993262767791748
+INFO:     127.0.0.1:42384 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.894010305404663
+INFO:     127.0.0.1:34932 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1664645671844482
+INFO:     127.0.0.1:34948 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.035508632659912
+INFO:     127.0.0.1:34950 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.319507598876953
+INFO:     127.0.0.1:42396 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8739006519317627
+INFO:     127.0.0.1:42406 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.034975528717041
+INFO:     127.0.0.1:49004 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1003739833831787
+INFO:     127.0.0.1:35736 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.127869129180908
+INFO:     127.0.0.1:35750 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.054795265197754
+INFO:     127.0.0.1:54290 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8974831104278564
+INFO:     127.0.0.1:54296 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.6115567684173584
+INFO:     127.0.0.1:54312 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2504353523254395
+INFO:     127.0.0.1:35228 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9716742038726807
+INFO:     127.0.0.1:46644 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9200644493103027
+INFO:     127.0.0.1:46650 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.917693853378296
+INFO:     127.0.0.1:46662 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.849632978439331
+INFO:     127.0.0.1:45602 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.558464765548706
+INFO:     127.0.0.1:45614 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8682973384857178
+INFO:     127.0.0.1:42602 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9711804389953613
+INFO:     127.0.0.1:42606 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.310048818588257
+INFO:     127.0.0.1:50092 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0999953746795654
+INFO:     127.0.0.1:50108 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.076870918273926
+INFO:     127.0.0.1:60828 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0584635734558105
+INFO:     127.0.0.1:60830 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9164869785308838
+INFO:     127.0.0.1:60844 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0167675018310547
+INFO:     127.0.0.1:50594 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9546678066253662
+INFO:     127.0.0.1:50604 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9603307247161865
+INFO:     127.0.0.1:50738 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2699928283691406
+INFO:     127.0.0.1:50740 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8663692474365234
+INFO:     127.0.0.1:60574 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.053554058074951
+INFO:     127.0.0.1:60590 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0693554878234863
+INFO:     127.0.0.1:60596 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.126863479614258
+INFO:     127.0.0.1:57166 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.081224203109741
+INFO:     127.0.0.1:57168 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9988481998443604
+INFO:     127.0.0.1:57640 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1471853256225586
+INFO:     127.0.0.1:57654 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.3709874153137207
+INFO:     127.0.0.1:58950 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2256860733032227
+INFO:     127.0.0.1:58964 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.173665761947632
+INFO:     127.0.0.1:49794 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.4202945232391357
+INFO:     127.0.0.1:49800 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0728988647460938
+INFO:     127.0.0.1:37366 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.921724796295166
+INFO:     127.0.0.1:54742 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.4107513427734375
+INFO:     127.0.0.1:54744 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8489172458648682
+INFO:     127.0.0.1:38628 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9922499656677246
+INFO:     127.0.0.1:38644 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.958308458328247
+INFO:     127.0.0.1:38654 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.460458517074585
+INFO:     127.0.0.1:59844 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.4719247817993164
+INFO:     127.0.0.1:59860 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.707533597946167
+INFO:     127.0.0.1:41782 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.975489616394043
+INFO:     127.0.0.1:54082 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.369331121444702
+INFO:     127.0.0.1:54098 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.081390857696533
+INFO:     127.0.0.1:50140 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9658246040344238
+INFO:     127.0.0.1:50154 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.5310211181640625
+INFO:     127.0.0.1:50160 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9332361221313477
+INFO:     127.0.0.1:49668 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.3262288570404053
+INFO:     127.0.0.1:34312 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.156771659851074
+INFO:     127.0.0.1:34320 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.194500684738159
+INFO:     127.0.0.1:55394 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0514578819274902
+INFO:     127.0.0.1:55404 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.2099854946136475
+INFO:     127.0.0.1:54160 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9570162296295166
+INFO:     127.0.0.1:52342 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.150533676147461
+INFO:     127.0.0.1:52348 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9603924751281738
+INFO:     127.0.0.1:52416 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8841404914855957
+INFO:     127.0.0.1:52428 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.127549886703491
+INFO:     127.0.0.1:46626 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9905686378479004
+INFO:     127.0.0.1:46628 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9093031883239746
+INFO:     127.0.0.1:46640 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9332585334777832
+INFO:     127.0.0.1:53698 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9590907096862793
+INFO:     127.0.0.1:53702 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0841965675354004
+INFO:     127.0.0.1:60136 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.037513017654419
+INFO:     127.0.0.1:60152 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8986918926239014
+INFO:     127.0.0.1:60166 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1835689544677734
+INFO:     127.0.0.1:44996 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0234177112579346
+INFO:     127.0.0.1:44998 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.263763904571533
+INFO:     127.0.0.1:48450 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.253624200820923
+INFO:     127.0.0.1:48460 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9488379955291748
+INFO:     127.0.0.1:35066 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9567179679870605
+INFO:     127.0.0.1:35068 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.625086545944214
+INFO:     127.0.0.1:35078 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.4713544845581055
+INFO:     127.0.0.1:38246 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9529378414154053
+INFO:     127.0.0.1:53512 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9548511505126953
+INFO:     127.0.0.1:53518 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9741780757904053
+INFO:     127.0.0.1:36760 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.156832218170166
+INFO:     127.0.0.1:36776 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.165693998336792
+INFO:     127.0.0.1:55466 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9379808902740479
+INFO:     127.0.0.1:55472 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1696290969848633
+INFO:     127.0.0.1:55488 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.216744899749756
+INFO:     127.0.0.1:60662 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.995415210723877
+INFO:     127.0.0.1:60674 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9001309871673584
+INFO:     127.0.0.1:57974 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.337043046951294
+INFO:     127.0.0.1:57982 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9641447067260742
+INFO:     127.0.0.1:47226 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.062962532043457
+INFO:     127.0.0.1:47234 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.973296880722046
+INFO:     127.0.0.1:41316 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0292422771453857
+INFO:     127.0.0.1:41324 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.8407483100891113
+INFO:     127.0.0.1:34980 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.065209150314331
+INFO:     127.0.0.1:53594 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9034299850463867
+INFO:     127.0.0.1:53606 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0406413078308105
+INFO:     127.0.0.1:53608 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.3013384342193604
+INFO:     127.0.0.1:36434 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9616615772247314
+INFO:     127.0.0.1:36444 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.092550754547119
+INFO:     127.0.0.1:53130 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.974442720413208
+INFO:     127.0.0.1:53144 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.7503480911254883
+INFO:     127.0.0.1:53150 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1586477756500244
+INFO:     127.0.0.1:60160 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.312659740447998
+INFO:     127.0.0.1:38600 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.039116621017456
+INFO:     127.0.0.1:38602 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.924628496170044
+INFO:     127.0.0.1:33972 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9784650802612305
+INFO:     127.0.0.1:33984 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8839166164398193
+INFO:     127.0.0.1:33994 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.010236978530884
+INFO:     127.0.0.1:41004 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0986549854278564
+INFO:     127.0.0.1:41016 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8005037307739258
+INFO:     127.0.0.1:41028 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0264151096343994
+INFO:     127.0.0.1:53946 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.4217560291290283
+INFO:     127.0.0.1:53956 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.170717716217041
+INFO:     127.0.0.1:49412 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0536093711853027
+INFO:     127.0.0.1:49740 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1332623958587646
+INFO:     127.0.0.1:49742 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.8179595470428467
+INFO:     127.0.0.1:42516 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9589109420776367
+INFO:     127.0.0.1:55432 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.093785285949707
+INFO:     127.0.0.1:55440 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.071765899658203
+INFO:     127.0.0.1:34300 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.242213487625122
+INFO:     127.0.0.1:52748 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9301846027374268
+INFO:     127.0.0.1:46114 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.640956401824951
+INFO:     127.0.0.1:46120 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8662683963775635
+INFO:     127.0.0.1:59468 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.8752293586730957
+INFO:     127.0.0.1:57282 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0265157222747803
+INFO:     127.0.0.1:57298 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2120678424835205
+INFO:     127.0.0.1:42266 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9565074443817139
+INFO:     127.0.0.1:42280 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0801186561584473
+INFO:     127.0.0.1:39496 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1857495307922363
+INFO:     127.0.0.1:39500 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1821517944335938
+INFO:     127.0.0.1:39108 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9074633121490479
+INFO:     127.0.0.1:39118 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.8044700622558594
+INFO:     127.0.0.1:39134 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1945834159851074
+INFO:     127.0.0.1:34074 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1647469997406006
+INFO:     127.0.0.1:49750 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.540830373764038
+INFO:     127.0.0.1:49760 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1659860610961914
+INFO:     127.0.0.1:39796 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.522181510925293
+INFO:     127.0.0.1:39804 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0938355922698975
+INFO:     127.0.0.1:44796 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9369797706604004
+INFO:     127.0.0.1:44812 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.149334669113159
+INFO:     127.0.0.1:40038 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.988478660583496
+INFO:     127.0.0.1:40040 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0848281383514404
+INFO:     127.0.0.1:50392 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1016457080841064
+INFO:     127.0.0.1:50394 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.360158681869507
+INFO:     127.0.0.1:32770 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0453484058380127
+INFO:     127.0.0.1:32772 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.044290781021118
+INFO:     127.0.0.1:32788 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.901062250137329
+INFO:     127.0.0.1:37492 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1852810382843018
+INFO:     127.0.0.1:37496 - "POST /infer HTTP/1.1" 200 OK
+compute: 3.3714685440063477
+INFO:     127.0.0.1:59982 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.2150073051452637
+INFO:     127.0.0.1:52890 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.284762144088745
+INFO:     127.0.0.1:52900 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9052870273590088
+INFO:     127.0.0.1:60290 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.1341989040374756
+INFO:     127.0.0.1:55206 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9321143627166748
+INFO:     127.0.0.1:55222 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9185791015625
+INFO:     127.0.0.1:55228 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.020186424255371
+INFO:     127.0.0.1:36594 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.917170524597168
+INFO:     127.0.0.1:36598 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.8450431823730469
+INFO:     127.0.0.1:56854 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.0942015647888184
+INFO:     127.0.0.1:56870 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.097675323486328
+INFO:     127.0.0.1:56882 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9923632144927979
+INFO:     127.0.0.1:53034 - "POST /infer HTTP/1.1" 200 OK
+compute: 1.9390513896942139
+INFO:     127.0.0.1:53036 - "POST /infer HTTP/1.1" 200 OK
+compute: 2.336611747741699
+INFO:     127.0.0.1:49728 - "POST /infer HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2045469]

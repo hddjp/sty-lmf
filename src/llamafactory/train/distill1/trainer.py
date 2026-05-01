@@ -54,11 +54,12 @@ logger.handlers.clear()
 logger.setLevel(logging.DEBUG)
 
 file_handler = logging.FileHandler(
-    filename="/data/sty/sty-lmf/log.txt",  
+    filename="/data2/sty/sty-lmf/log.txt",  
     mode="a",                   
     encoding="utf-8"             
 )
 logger.addHandler(file_handler)
+logger.propagate = False
 
 def padding_sequence(batch_samples):
     max_len = max([s["input_ids"].shape[1] for s in batch_samples])
@@ -106,6 +107,8 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         teacher_name,
         select_type,
         train_alpha,
+        kl_type,
+        distill_temp,
         finetuning_args: "FinetuningArguments",
         processor: Optional["ProcessorMixin"],
         model_args: Optional["ModelArguments"] = None,
@@ -159,13 +162,16 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         
         self.select_type = select_type
         self.train_alpha = train_alpha
+        self.kl_type = kl_type
+        self.distill_temp = 1 if distill_temp is None else distill_temp
+        #logger.debug(self.distill_temp)
         
         if self.train_alpha > 0 or "kl" in self.select_type:
             client_dir = os.path.dirname(os.path.abspath(__file__))
             server_path = os.path.join(client_dir, "model_infer.py")
-            cmd = f"CUDA_VISIBLE_DEVICES=0,1,2 python {server_path} --model {teacher_name}"
+            cmd = f"CUDA_VISIBLE_DEVICES=0,1 python {server_path} --model {teacher_name}"
             self.server_process = subprocess.Popen(cmd, shell=True)
-            time.sleep(180)
+            time.sleep(30)
             
             #self.teacher_model = AutoModelForCausalLM.from_pretrained(teacher_name,torch_dtype=torch.bfloat16,device_map="cuda:1")
             #for name, module in self.teacher_model.named_modules():
@@ -311,7 +317,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         #logger.debug(f"GPU {os.environ.get('RANK')}: {torch.cuda.memory_allocated(int(os.environ.get('RANK')))/1024**2:.2f} MB")
         #logger.debug(os.environ.get("RANK")+"-------"+str(selected_inputs["input_ids"].shape)+"-------"+str(selected_inputs["labels"].shape)+"-------"+str(selected_inputs["attention_mask"].shape))
         
-        logger.debug(os.environ.get("RANK")+"-------"+str(selected_inputs["labels"].shape))
+        #logger.debug(os.environ.get("RANK")+"-------"+str(selected_inputs["labels"].shape))
         
         outputs = model(**selected_inputs)
         
@@ -319,26 +325,41 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
             with torch.no_grad():
                 #teacher_outputs = self.teacher_model(**{k: v.to(self.teacher_model.device) for k, v in selected_inputs.items()})
                 #teacher_logits = teacher_outputs.logits.to(model.device)
+                t1=time.time()
                 teacher_logits = infer(selected_inputs).to(model.device)
-                teacher_probs = torch.nn.functional.softmax(teacher_logits, dim=-1)
+                t2= time.time()
+                logger.debug(t2-t1)
+                teacher_probs = torch.nn.functional.softmax(teacher_logits / self.distill_temp, dim=-1)
                 
-            student_log_probs = torch.nn.functional.log_softmax(outputs.logits, dim=-1)
+            student_log_probs = torch.nn.functional.log_softmax(outputs.logits / self.distill_temp, dim=-1)
             
-            kl_div =  torch.nn.functional.kl_div( 
-                student_log_probs,
-                teacher_probs, 
-                reduction="none"  
-            )
+            if self.kl_type == 1:
+                kl_div =  torch.nn.functional.kl_div( 
+                    student_log_probs,
+                    teacher_probs, 
+                    reduction="none"  
+                )
+            
+            elif self.kl_type == 2:
+                log_ratio = student_log_probs - torch.log(teacher_probs + 1e-10 )
+                kl_div = teacher_probs * (0.5 * log_ratio ** 2)                            
+            
+            
+            elif self.kl_type == 3:
+                log_ratio = student_log_probs - torch.log(teacher_probs + 1e-10)
+                ratio = torch.exp(log_ratio)
+                kl_div = teacher_probs * ((ratio - 1) - log_ratio)
             
             mask = (selected_inputs["labels"] != -100).unsqueeze(-1).to(kl_div.device)
             kl_div_masked = kl_div * mask
             
             num_valid_tokens = mask.sum()
-            loss1 = kl_div_masked.sum() / num_valid_tokens
+            loss1 = kl_div_masked.sum() / num_valid_tokens * self.distill_temp * self.distill_temp
         
             loss2 =  outputs.loss
             #logger.debug(f"loss1: {loss1} ----- loss2: {loss2} ----- {num_valid_tokens} ----- {mask.shape}")
             loss = self.train_alpha * loss1 + (1-self.train_alpha) * loss2
+        
         else:
             loss =  outputs.loss
         
