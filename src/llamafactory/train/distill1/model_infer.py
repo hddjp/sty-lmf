@@ -15,7 +15,7 @@ from fastapi.responses import StreamingResponse
 #    sys.exit()
 
 
-sys.stdout = sys.stderr = open('/data2/sty/sty-lmf/log1.txt', 'a', encoding='utf-8')
+sys.stdout = sys.stderr = open('/data/sty/sty-lmf/log1.txt', 'a', encoding='utf-8')
 app = FastAPI()
 
 try:

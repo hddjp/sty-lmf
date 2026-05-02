@@ -51,7 +51,7 @@ logger.setLevel(logging.DEBUG)
 logger.propagate = False
 
 file_handler = logging.FileHandler(
-    filename="/data2/sty/sty-lmf/log.txt",  
+    filename="/data/sty/sty-lmf/log.txt",  
     mode="a",                   
     encoding="utf-8"             
 )
@@ -153,7 +153,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         self.train_alpha = train_alpha
         self.kl_type = kl_type
         self.distill_temp = 1 if distill_temp is None else distill_temp
-        logger.debug(self.distill_temp)
+        #logger.debug(self.distill_temp)
         
         if self.train_alpha > 0 or "kl" in self.select_type:
             self.teacher_model = AutoModelForCausalLM.from_pretrained(teacher_name,torch_dtype=torch.bfloat16).to(f"cuda:{os.environ.get('RANK')}")
@@ -225,7 +225,13 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
                     "attention_mask": combined_attn.unsqueeze(0)
                 })
             if "random" in self.select_type:
-                selected_sample = random.sample(split_samples,1)[0]
+                try:
+                    selected_sample = random.sample(split_samples,1)[0]
+                except:
+                    logger.debug(split_samples)
+                    stytext = self.tokenizer.decode(single_input, skip_special_tokens=True)
+                    logger.debug(os.environ.get("RANK")+"--------"+repr(stytext))
+                    a = 1/0
             else:     
                 with torch.no_grad():
                     loss_list=[]
@@ -347,7 +353,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
             loss1 = kl_div_masked.sum() / num_valid_tokens * self.distill_temp * self.distill_temp
         
             loss2 =  outputs.loss
-            logger.debug(f"loss1: {loss1} ----- loss2: {loss2} ----- {num_valid_tokens} ----- {mask.shape}")
+            #logger.debug(f"loss1: {loss1} ----- loss2: {loss2} ----- {num_valid_tokens} ----- {mask.shape}")
             loss = self.train_alpha * loss1 + (1-self.train_alpha) * loss2
         else:
             loss =  outputs.loss

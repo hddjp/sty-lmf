@@ -52,6 +52,6 @@ teacher_name: Qwen/Qwen3-30B-A3B-Instruct-2507 #Qwen/Qwen3-4B-Instruct-2507
 select_type: random
 output_dir: saves/qwen3-4b/distill_temp2
 train_alpha: 1
-kl_type: 3
+kl_type: 1
 distill_temp: 2
 

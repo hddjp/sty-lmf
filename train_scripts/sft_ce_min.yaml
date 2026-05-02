@@ -1,5 +1,5 @@
 ### model
-model_name_or_path: Qwen/Qwen3-0.6B #Qwen/Qwen3-4B-Instruct-2507
+model_name_or_path: Qwen/Qwen3-0.6B
 trust_remote_code: true
 flash_attn: fa2
 
@@ -10,10 +10,10 @@ finetuning_type: full
 
 
 ### dataset
-dataset: gsm8kall, MATHall
+dataset: gsm8k_all, MATH_all
 template: qwen3_nothink
 cutoff_len: 40000
-max_samples: 32
+#max_samples: 32
 #disable_shuffling: true 
 
 ### output
@@ -25,7 +25,7 @@ report_to: wandb  # choices: [none, wandb, tensorboard, swanlab, mlflow]
 
 ### train
 per_device_train_batch_size: 1
-gradient_accumulation_steps: 8
+gradient_accumulation_steps: 32
 learning_rate: 1e-5
 num_train_epochs: 10.0
 lr_scheduler_type: cosine
@@ -46,13 +46,12 @@ early_stopping_steps: 200
 metric_for_best_model: eval_loss
 load_best_model_at_end: true
 
+deepspeed: examples/deepspeed/ds_z3_offload_config.json
 
-deepspeed: examples/deepspeed/ds_z2_offload_config.json
-
-teacher_name: Qwen/Qwen3-4B-Instruct-2507 #Qwen/Qwen3-30B-A3B-Instruct-2507 #Qwen/Qwen3-4B-Instruct-2507 
-select_type: random
-output_dir: saves/qwen3-0.6b/distill_temp2
-train_alpha: 1
+teacher_name: Qwen/Qwen3-4B-Instruct-2507 
+select_type: ce_min
+output_dir: saves/qwen3-0.6b/sft_ce_min
+train_alpha: 0
 kl_type: 1
-distill_temp: 2
+
 

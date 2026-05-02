@@ -54,7 +54,7 @@ logger.handlers.clear()
 logger.setLevel(logging.DEBUG)
 
 file_handler = logging.FileHandler(
-    filename="/data2/sty/sty-lmf/log.txt",  
+    filename="/data/sty/sty-lmf/log.txt",  
     mode="a",                   
     encoding="utf-8"             
 )

@@ -9,7 +9,7 @@ def merge_outputs(input_file, output_file, separator):
         new_item = {
             "instruction": item["instruction"],
             "input": item["input"],
-            "output": "######" + separator.join(item["outputs"])
+            "output": separator + separator.join(item["outputs"]) + separator
         }
         processed_data.append(new_item)
     
@@ -18,7 +18,7 @@ def merge_outputs(input_file, output_file, separator):
 
 if __name__ == "__main__":
     merge_outputs(
-        input_file="/data/sty/LLaMA-Factory/data/gsm8k30B.json",
-        output_file="/data/sty/LLaMA-Factory/data/gsm8kall.json",
+        input_file="/data/sty/sty-lmf/data/MATH_4B.jsonl",
+        output_file="/data/sty/sty-lmf/data/MATH_all.json",
         separator="######"
     )
