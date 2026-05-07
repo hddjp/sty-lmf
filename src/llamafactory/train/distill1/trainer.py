@@ -327,7 +327,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
                 t1=time.time()
                 teacher_logits = infer(selected_inputs).to(model.device)
                 t2= time.time()
-                logger.debug(t2-t1)
+                #logger.debug(t2-t1)
                 teacher_probs = torch.nn.functional.softmax(teacher_logits / self.distill_temp, dim=-1)
                 
             student_log_probs = torch.nn.functional.log_softmax(outputs.logits / self.distill_temp, dim=-1)
@@ -356,7 +356,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
             loss1 = kl_div_masked.sum() / num_valid_tokens * self.distill_temp * self.distill_temp
         
             loss2 =  outputs.loss
-            logger.debug(f"loss1: {loss1} ----- loss2: {loss2} ----- {num_valid_tokens} ----- {mask.shape}")
+            #logger.debug(f"loss1: {loss1} ----- loss2: {loss2} ----- {num_valid_tokens} ----- {mask.shape}")
             loss = self.train_alpha * loss1 + (1-self.train_alpha) * loss2
         
         else:

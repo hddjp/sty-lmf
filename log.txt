@@ -196,3 +196,114 @@ loss1: 1.3515625 ----- loss2: 1.07286536693573 ----- 74 ----- torch.Size([1, 147
 loss1: 0.50390625 ----- loss2: 0.5534093379974365 ----- 381 ----- torch.Size([1, 453, 1])
 5.999466896057129
 loss1: 0.388671875 ----- loss2: 0.5700510740280151 ----- 3169 ----- torch.Size([1, 3250, 1])
+2.865253448486328
+loss1: 0.330078125 ----- loss2: 0.36952728033065796 ----- 398 ----- torch.Size([1, 472, 1])
+2.9450252056121826
+loss1: 0.267578125 ----- loss2: 0.28198593854904175 ----- 541 ----- torch.Size([1, 581, 1])
+4.087222576141357
+loss1: 0.3125 ----- loss2: 0.42730987071990967 ----- 1968 ----- torch.Size([1, 2104, 1])
+2.3352062702178955
+loss1: 0.423828125 ----- loss2: 0.674317479133606 ----- 172 ----- torch.Size([1, 224, 1])
+2.541564702987671
+loss1: 0.546875 ----- loss2: 0.6132859587669373 ----- 386 ----- torch.Size([1, 510, 1])
+3.760280132293701
+loss1: 0.349609375 ----- loss2: 0.5113322734832764 ----- 1917 ----- torch.Size([1, 1993, 1])
+3.4164626598358154
+loss1: 0.56640625 ----- loss2: 0.5959394574165344 ----- 245 ----- torch.Size([1, 298, 1])
+3.8593106269836426
+loss1: 0.462890625 ----- loss2: 0.5633543133735657 ----- 795 ----- torch.Size([1, 839, 1])
+5.347019195556641
+loss1: 0.396484375 ----- loss2: 0.6233410239219666 ----- 2695 ----- torch.Size([1, 2835, 1])
+3.9840657711029053
+loss1: 0.53125 ----- loss2: 0.5537590384483337 ----- 184 ----- torch.Size([1, 226, 1])
+4.050520181655884
+loss1: 0.443359375 ----- loss2: 0.4350253641605377 ----- 220 ----- torch.Size([1, 262, 1])
+7.275934219360352
+loss1: 0.412109375 ----- loss2: 0.6620743870735168 ----- 4422 ----- torch.Size([1, 4477, 1])
+1.6380746364593506
+loss1: 0.69921875 ----- loss2: 0.6506200432777405 ----- 167 ----- torch.Size([1, 239, 1])
+2.0997660160064697
+loss1: 0.31640625 ----- loss2: 0.36014166474342346 ----- 638 ----- torch.Size([1, 712, 1])
+2.1378707885742188
+loss1: 0.373046875 ----- loss2: 0.4808798134326935 ----- 743 ----- torch.Size([1, 865, 1])
+2.227344512939453
+loss1: 0.88671875 ----- loss2: 0.8610846400260925 ----- 144 ----- torch.Size([1, 221, 1])
+2.2400548458099365
+loss1: 0.83984375 ----- loss2: 0.9002478122711182 ----- 179 ----- torch.Size([1, 248, 1])
+3.7884361743927
+loss1: 0.330078125 ----- loss2: 0.507123589515686 ----- 1989 ----- torch.Size([1, 2066, 1])
+1.0980980396270752
+loss1: 0.71484375 ----- loss2: 0.7167991995811462 ----- 168 ----- torch.Size([1, 221, 1])
+1.244598150253296
+loss1: 0.61328125 ----- loss2: 0.6815090179443359 ----- 336 ----- torch.Size([1, 403, 1])
+1.3166301250457764
+loss1: 0.474609375 ----- loss2: 0.5307676196098328 ----- 379 ----- torch.Size([1, 500, 1])
+2.03570556640625
+loss1: 0.578125 ----- loss2: 0.6262395977973938 ----- 281 ----- torch.Size([1, 398, 1])
+2.342358350753784
+loss1: 0.47265625 ----- loss2: 0.6227535009384155 ----- 723 ----- torch.Size([1, 780, 1])
+2.5480103492736816
+loss1: 0.2373046875 ----- loss2: 0.28372901678085327 ----- 887 ----- torch.Size([1, 980, 1])
+1.4675109386444092
+loss1: 0.63671875 ----- loss2: 0.6468045115470886 ----- 166 ----- torch.Size([1, 271, 1])
+1.5167064666748047
+loss1: 0.609375 ----- loss2: 0.642423689365387 ----- 250 ----- torch.Size([1, 306, 1])
+1.9962029457092285
+loss1: 0.271484375 ----- loss2: 0.30868878960609436 ----- 814 ----- torch.Size([1, 932, 1])
+5.120738744735718
+loss1: 0.47265625 ----- loss2: 0.8142966628074646 ----- 238 ----- torch.Size([1, 342, 1])
+5.405300140380859
+loss1: 0.423828125 ----- loss2: 0.5678239464759827 ----- 585 ----- torch.Size([1, 658, 1])
+9.357953310012817
+loss1: 0.380859375 ----- loss2: 0.6338831782341003 ----- 4680 ----- torch.Size([1, 4883, 1])
+1.531418800354004
+loss1: 1.015625 ----- loss2: 0.98838210105896 ----- 126 ----- torch.Size([1, 211, 1])
+1.5709145069122314
+loss1: 0.82421875 ----- loss2: 0.8872464895248413 ----- 160 ----- torch.Size([1, 277, 1])
+2.3377459049224854
+loss1: 0.365234375 ----- loss2: 0.4963475465774536 ----- 1061 ----- torch.Size([1, 1141, 1])
+1.2446653842926025
+loss1: 0.6953125 ----- loss2: 0.6494468450546265 ----- 142 ----- torch.Size([1, 208, 1])
+1.2891876697540283
+loss1: 0.58984375 ----- loss2: 0.5650164484977722 ----- 192 ----- torch.Size([1, 248, 1])
+1.7361414432525635
+loss1: 0.3984375 ----- loss2: 0.4550046920776367 ----- 792 ----- torch.Size([1, 854, 1])
+6.64532995223999
+loss1: 0.59765625 ----- loss2: 0.630466878414154 ----- 310 ----- torch.Size([1, 374, 1])
+8.941672325134277
+loss1: 0.546875 ----- loss2: 0.8883604407310486 ----- 2479 ----- torch.Size([1, 2846, 1])
+9.995689153671265
+loss1: 0.345703125 ----- loss2: 0.5431205630302429 ----- 4599 ----- torch.Size([1, 4743, 1])
+Using auto half precision backend
+Using auto half precision backend
+Using auto half precision backend
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+Currently training with a batch size of: 1
+Currently training with a batch size of: 1
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+Currently training with a batch size of: 1
+***** Running training *****
+***** Running training *****
+  Num examples = 17,182
+  Num Epochs = 10
+  Instantaneous batch size per device = 1
+  Total train batch size (w. parallel, distributed & accumulation) = 96
+  Num examples = 17,182
+  Gradient Accumulation steps = 32
+  Num Epochs = 10
+  Total optimization steps = 1,790
+  Instantaneous batch size per device = 1
+  Total train batch size (w. parallel, distributed & accumulation) = 96
+  Gradient Accumulation steps = 32
+  Total optimization steps = 1,790
+  Number of trainable parameters = 596,049,920
+  Number of trainable parameters = 596,049,920
+***** Running training *****
+  Num examples = 17,182
+  Num Epochs = 10
+  Instantaneous batch size per device = 1
+  Total train batch size (w. parallel, distributed & accumulation) = 96
+  Gradient Accumulation steps = 32
+  Total optimization steps = 1,790
+  Number of trainable parameters = 596,049,920
