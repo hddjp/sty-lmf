@@ -4,7 +4,7 @@ trust_remote_code: true
 flash_attn: fa2
 
 ### method
-stage: distill
+stage: distill1
 do_train: true
 finetuning_type: full
 
@@ -42,7 +42,7 @@ eval_strategy: steps
 eval_steps: 50
 do_eval: true
 per_device_eval_batch_size: 1
-early_stopping_steps: 200
+early_stopping_steps: 4
 metric_for_best_model: eval_loss
 load_best_model_at_end: true
 

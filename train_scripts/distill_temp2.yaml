@@ -1,5 +1,5 @@
 ### model
-model_name_or_path: Qwen/Qwen3-4B-Instruct-2507
+model_name_or_path: Qwen/Qwen3-0.6B
 trust_remote_code: true
 flash_attn: fa2
 
@@ -10,7 +10,7 @@ finetuning_type: full
 
 
 ### dataset
-dataset: gsm8kall, MATHall
+dataset: gsm8k_all, MATH_all
 template: qwen3_nothink
 cutoff_len: 40000
 #max_samples: 32
@@ -42,15 +42,15 @@ eval_strategy: steps
 eval_steps: 50
 do_eval: true
 per_device_eval_batch_size: 1
-early_stopping_steps: 200
+early_stopping_steps: 4
 metric_for_best_model: eval_loss
 load_best_model_at_end: true
 
 deepspeed: examples/deepspeed/ds_z3_offload_config.json
 
-teacher_name: Qwen/Qwen3-30B-A3B-Instruct-2507 #Qwen/Qwen3-4B-Instruct-2507 
+teacher_name: Qwen/Qwen3-4B-Instruct-2507 
 select_type: random
-output_dir: saves/qwen3-4b/distill_temp2
+output_dir: saves/qwen3-0.6b/distill_temp2
 train_alpha: 1
 kl_type: 1
 distill_temp: 2

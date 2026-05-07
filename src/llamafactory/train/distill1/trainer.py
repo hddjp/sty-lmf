@@ -59,7 +59,6 @@ file_handler = logging.FileHandler(
     encoding="utf-8"             
 )
 logger.addHandler(file_handler)
-logger.propagate = False
 
 def padding_sequence(batch_samples):
     max_len = max([s["input_ids"].shape[1] for s in batch_samples])
@@ -169,9 +168,9 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         if self.train_alpha > 0 or "kl" in self.select_type:
             client_dir = os.path.dirname(os.path.abspath(__file__))
             server_path = os.path.join(client_dir, "model_infer.py")
-            cmd = f"CUDA_VISIBLE_DEVICES=0,1 python {server_path} --model {teacher_name}"
+            cmd = f"CUDA_VISIBLE_DEVICES=0 python {server_path} --model {teacher_name}"
             self.server_process = subprocess.Popen(cmd, shell=True)
-            time.sleep(30)
+            time.sleep(60)
             
             #self.teacher_model = AutoModelForCausalLM.from_pretrained(teacher_name,torch_dtype=torch.bfloat16,device_map="cuda:1")
             #for name, module in self.teacher_model.named_modules():
@@ -357,7 +356,7 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
             loss1 = kl_div_masked.sum() / num_valid_tokens * self.distill_temp * self.distill_temp
         
             loss2 =  outputs.loss
-            #logger.debug(f"loss1: {loss1} ----- loss2: {loss2} ----- {num_valid_tokens} ----- {mask.shape}")
+            logger.debug(f"loss1: {loss1} ----- loss2: {loss2} ----- {num_valid_tokens} ----- {mask.shape}")
             loss = self.train_alpha * loss1 + (1-self.train_alpha) * loss2
         
         else:

@@ -10,7 +10,7 @@ finetuning_type: full
 
 
 ### dataset
-dataset: gsm8kall, MATHall
+dataset: gsm8k_all, MATH_all
 template: qwen3_nothink
 cutoff_len: 40000
 max_samples: 32
@@ -42,7 +42,7 @@ eval_strategy: steps
 eval_steps: 50
 do_eval: true
 per_device_eval_batch_size: 1
-early_stopping_steps: 200
+early_stopping_steps: 4
 metric_for_best_model: eval_loss
 load_best_model_at_end: true
 

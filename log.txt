@@ -1,124 +1,198 @@
 Using auto half precision backend
-The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+Using auto half precision backend
 Using auto half precision backend
 The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
-Currently training with a batch size of: 1
-Using auto half precision backend
-The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
-Currently training with a batch size of: 1
-Using auto half precision backend
 The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
 Currently training with a batch size of: 1
 Currently training with a batch size of: 1
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+Currently training with a batch size of: 1
 ***** Running training *****
   Num examples = 17,182
   Num Epochs = 10
-  Instantaneous batch size per device = 1
-  Total train batch size (w. parallel, distributed & accumulation) = 128
-  Gradient Accumulation steps = 32
-  Total optimization steps = 1,350
 ***** Running training *****
+  Instantaneous batch size per device = 1
+  Total train batch size (w. parallel, distributed & accumulation) = 96
+  Gradient Accumulation steps = 32
+  Total optimization steps = 1,790
   Num examples = 17,182
   Num Epochs = 10
   Instantaneous batch size per device = 1
-  Total train batch size (w. parallel, distributed & accumulation) = 128
+  Total train batch size (w. parallel, distributed & accumulation) = 96
   Gradient Accumulation steps = 32
-***** Running training *****
-  Total optimization steps = 1,350
-  Num examples = 17,182
-  Num Epochs = 10
-  Number of trainable parameters = 596,049,920
-  Instantaneous batch size per device = 1
-  Total train batch size (w. parallel, distributed & accumulation) = 128
-  Gradient Accumulation steps = 32
-  Total optimization steps = 1,350
+  Total optimization steps = 1,790
   Number of trainable parameters = 596,049,920
   Number of trainable parameters = 596,049,920
 ***** Running training *****
   Num examples = 17,182
   Num Epochs = 10
   Instantaneous batch size per device = 1
-  Total train batch size (w. parallel, distributed & accumulation) = 128
+  Total train batch size (w. parallel, distributed & accumulation) = 96
   Gradient Accumulation steps = 32
-  Total optimization steps = 1,350
+  Total optimization steps = 1,790
   Number of trainable parameters = 596,049,920
-
-***** Running Evaluation *****
-
-***** Running Evaluation *****
-
-***** Running Evaluation *****
-  Num examples = 905
-  Batch size = 1
-  Num examples = 905
-  Num examples = 905
-  Batch size = 1
-  Batch size = 1
-
-***** Running Evaluation *****
-  Num examples = 905
-  Batch size = 1
-
-***** Running Evaluation *****
-  Num examples = 905
-
-***** Running Evaluation *****
-
-***** Running Evaluation *****
-  Batch size = 1
-  Num examples = 905
-  Num examples = 905
-  Batch size = 1
-  Batch size = 1
-
-***** Running Evaluation *****
-  Num examples = 905
-  Batch size = 1
-Saving model checkpoint to saves/qwen3-0.6b/sft_random/checkpoint-100
-[]
-Trainer.tokenizer is now deprecated. You should use Trainer.processing_class instead.
-1--------"user\nLet's think step by step. Output the final answer after '####'.\nFor any integer $n>1$, the number of prime numbers greater than $n!+1$ and less than $n!+n$ is:\n$\\text{(A) } 0\\quad\\qquad \\text{(B) } 1\\quad\\\\ \\text{(C) } \\frac{n}{2} \\text{ for n even, } \\frac{n+1}{2} \\text{ for n odd}\\quad\\\\ \\text{(D) } n-1\\quad \\text{(E) } n$\nassistant\n######We are given a problem about the number of **prime numbers** greater than $ n! + 1 $ and less than $ n! + n $, for any integer $ n > 1 $.\n\nWe are to determine how many primes lie in the open interval:\n\n$$\n(n! + 1, n! + n)\n$$\n\nLet’s analyze this step by step.\n\n---\n\n### Step 1: Understand the structure of the numbers in the interval\n\nWe are looking at integers from $ n! + 2 $ to $ n! + n - 1 $, since we want **greater than** $ n! + 1 $ and **less than** $ n! + n $.\n\nSo the numbers are:\n\n$$\nn! + 2, n! + 3, \\ldots, n! + (n - 1)\n$$\n\nWe want to know **how many of these are prime**.\n\n---\n\n### Step 2: Consider divisibility of each number\n\nLet’s take a general term in this list: $ n! + k $, where $ k = 2, 3, \\ldots, n-1 $\n\nWe ask: is $ n! + k $ divisible by $ k $?\n\nNote that:\n\n- $ n! $ is divisible by $ k $, because $ k \\leq n $, and $ n! $ is the product of all integers from 1 to $ n $, so $ k \\mid n! $\n\nTherefore:\n\n$$\nn! \\equiv 0 \\pmod{k}\n\\Rightarrow n! + k \\equiv 0 + k \\equiv 0 \\pmod{k}\n$$\n\nSo $ k \\mid (n! + k) $\n\nThat means $ n! + k $ is divisible by $ k $\n\nBut is it possible that $ n! + k $ is divisible by $ k $ and still prime?\n\nOnly if $ n! + k = k $, which is impossible because $ n! + k > k $ for $ n > 1 $\n\nTherefore, $ n! + k $ is divisible by $ k $, and since $ k > 1 $, $ n! + k $ is **composite** (unless $ n! + k = k $, which it isn’t).\n\n---\n\n### Step 3: Apply this to each $ k = 2, 3, \\ldots, n-1 $\n\nSo every number of the form $ n! + k $ for $ k = 2, 3, \\ldots, n-1 $ is divisible by $ k $, and greater than $ k $, hence composite.\n\nTherefore, **none** of the numbers in the interval $ (n! + 1, n! + n) $ are prime.\n\n---\n\n### Step 4: What about $ n! + n $?  \nWe are not including $ n! + n $, since the upper bound is **less than** $ n! + n $. So even if $ n! + n $ were prime, it's excluded.\n\nAlso, $ n! + 1 $ is excluded because we want numbers **greater than** $ n! + 1 $.\n\nSo the entire open interval $ (n! + 1, n! + n) $ contains only composite numbers.\n\n---\n\n### Conclusion:\n\nThere are **zero** prime numbers in that interval.\n\n---\n\n### Final Answer:\n\n$$\n\\boxed{\\text{(A) } 0}\n$$\n\n##########\n"
+1.367647409439087
+loss1: 0.93359375 ----- loss2: 1.0076302289962769 ----- 122 ----- torch.Size([1, 192, 1])
+1.4647157192230225
+loss1: 0.6953125 ----- loss2: 0.7396488785743713 ----- 232 ----- torch.Size([1, 326, 1])
+2.0235424041748047
+loss1: 0.5859375 ----- loss2: 0.7728992104530334 ----- 545 ----- torch.Size([1, 1078, 1])
+3.4671826362609863
+loss1: 0.271484375 ----- loss2: 0.31636589765548706 ----- 583 ----- torch.Size([1, 649, 1])
+4.1521384716033936
+loss1: 14.5625 ----- loss2: 0.5346465110778809 ----- 1342 ----- torch.Size([1, 1414, 1])
+7.920865058898926
+loss1: 0.3515625 ----- loss2: 0.55296790599823 ----- 4774 ----- torch.Size([1, 5230, 1])
+0.5491781234741211
+loss1: 12.875 ----- loss2: 0.500576376914978 ----- 222 ----- torch.Size([1, 262, 1])
+0.6055119037628174
+loss1: 14.625 ----- loss2: 0.7096222639083862 ----- 164 ----- torch.Size([1, 272, 1])
+0.8038971424102783
+loss1: 14.75 ----- loss2: 0.31479009985923767 ----- 478 ----- torch.Size([1, 537, 1])
+0.5690927505493164
+loss1: 6.65625 ----- loss2: 0.5541457533836365 ----- 225 ----- torch.Size([1, 293, 1])
+0.6148622035980225
+loss1: 4.65625 ----- loss2: 0.7710578441619873 ----- 236 ----- torch.Size([1, 342, 1])
+0.7474398612976074
+loss1: 11.0 ----- loss2: 0.2590563893318176 ----- 418 ----- torch.Size([1, 475, 1])
+0.7080471515655518
+loss1: 0.61328125 ----- loss2: 0.670018196105957 ----- 225 ----- torch.Size([1, 313, 1])
+0.7831344604492188
+loss1: 13.6875 ----- loss2: 0.35354602336883545 ----- 344 ----- torch.Size([1, 416, 1])
+1.02305006980896
+loss1: 13.4375 ----- loss2: 0.3516668975353241 ----- 634 ----- torch.Size([1, 679, 1])
+1.7334747314453125
+loss1: 0.6875 ----- loss2: 0.733299195766449 ----- 180 ----- torch.Size([1, 253, 1])
+1.804922103881836
+loss1: 1.984375 ----- loss2: 0.6378349661827087 ----- 244 ----- torch.Size([1, 342, 1])
+5.426013946533203
+loss1: 14.875 ----- loss2: 0.5447261929512024 ----- 4617 ----- torch.Size([1, 4733, 1])
+1.5995457172393799
+loss1: 1.3515625 ----- loss2: 1.07286536693573 ----- 74 ----- torch.Size([1, 147, 1])
+1.8473336696624756
+loss1: 11.3125 ----- loss2: 0.5534093379974365 ----- 381 ----- torch.Size([1, 453, 1])
+3.869565725326538
+loss1: 0.388671875 ----- loss2: 0.5700510740280151 ----- 3169 ----- torch.Size([1, 3250, 1])
+1.2217695713043213
+loss1: 13.6875 ----- loss2: 0.36952728033065796 ----- 398 ----- torch.Size([1, 472, 1])
+1.4370951652526855
+loss1: 14.25 ----- loss2: 0.28198593854904175 ----- 541 ----- torch.Size([1, 581, 1])
+2.668480157852173
+loss1: 13.4375 ----- loss2: 0.42730987071990967 ----- 1968 ----- torch.Size([1, 2104, 1])
+0.9457614421844482
+loss1: 0.423828125 ----- loss2: 0.674317479133606 ----- 172 ----- torch.Size([1, 224, 1])
+1.1539056301116943
+loss1: 10.3125 ----- loss2: 0.6132859587669373 ----- 386 ----- torch.Size([1, 510, 1])
+2.189485788345337
+loss1: 11.3125 ----- loss2: 0.5113322734832764 ----- 1917 ----- torch.Size([1, 1993, 1])
+1.3457579612731934
+loss1: 10.0 ----- loss2: 0.5959394574165344 ----- 245 ----- torch.Size([1, 298, 1])
+1.7278509140014648
+loss1: 13.25 ----- loss2: 0.5633543133735657 ----- 795 ----- torch.Size([1, 839, 1])
+3.6639115810394287
+loss1: 14.1875 ----- loss2: 0.6233410239219666 ----- 2695 ----- torch.Size([1, 2835, 1])
+1.485680103302002
+loss1: 13.0 ----- loss2: 0.4350253641605377 ----- 220 ----- torch.Size([1, 262, 1])
+1.4780559539794922
+loss1: 0.53125 ----- loss2: 0.5537590384483337 ----- 184 ----- torch.Size([1, 226, 1])
+5.356820344924927
+loss1: 12.375 ----- loss2: 0.6620743870735168 ----- 4422 ----- torch.Size([1, 4477, 1])
+0.7977085113525391
+loss1: 0.69921875 ----- loss2: 0.6506200432777405 ----- 167 ----- torch.Size([1, 239, 1])
+1.181687831878662
+loss1: 13.8125 ----- loss2: 0.36014166474342346 ----- 638 ----- torch.Size([1, 712, 1])
+1.3381648063659668
+loss1: 0.373046875 ----- loss2: 0.4808798134326935 ----- 743 ----- torch.Size([1, 865, 1])
+0.9002861976623535
+loss1: 0.88671875 ----- loss2: 0.8610846400260925 ----- 144 ----- torch.Size([1, 221, 1])
+1.0256357192993164
+loss1: 0.83984375 ----- loss2: 0.9002478122711182 ----- 179 ----- torch.Size([1, 248, 1])
+2.2810466289520264
+loss1: 13.0625 ----- loss2: 0.507123589515686 ----- 1989 ----- torch.Size([1, 2066, 1])
+0.5125401020050049
+loss1: 0.71484375 ----- loss2: 0.7167991995811462 ----- 168 ----- torch.Size([1, 221, 1])
+0.6876628398895264
+loss1: 11.3125 ----- loss2: 0.6815090179443359 ----- 336 ----- torch.Size([1, 403, 1])
+0.7258584499359131
+loss1: 9.8125 ----- loss2: 0.5307676196098328 ----- 379 ----- torch.Size([1, 500, 1])
+0.9180834293365479
+loss1: 9.3125 ----- loss2: 0.6262395977973938 ----- 281 ----- torch.Size([1, 398, 1])
+1.211822748184204
+loss1: 13.4375 ----- loss2: 0.6227535009384155 ----- 723 ----- torch.Size([1, 780, 1])
+1.3198204040527344
+loss1: 12.6875 ----- loss2: 0.28372901678085327 ----- 887 ----- torch.Size([1, 980, 1])
+Using auto half precision backend
+Using auto half precision backend
 Using auto half precision backend
 The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
-Using auto half precision backend
 The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
-Using auto half precision backend
-The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
-Using auto half precision backend
+Currently training with a batch size of: 1
 The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
 Currently training with a batch size of: 1
 Currently training with a batch size of: 1
-Currently training with a batch size of: 1
-Currently training with a batch size of: 1
+***** Running training *****
 ***** Running training *****
   Num examples = 17,182
   Num Epochs = 10
   Instantaneous batch size per device = 1
-  Total train batch size (w. parallel, distributed & accumulation) = 128
-  Gradient Accumulation steps = 32
-  Total optimization steps = 1,350
-***** Running training *****
   Num examples = 17,182
+  Total train batch size (w. parallel, distributed & accumulation) = 96
   Num Epochs = 10
-  Instantaneous batch size per device = 1
-  Total train batch size (w. parallel, distributed & accumulation) = 128
   Gradient Accumulation steps = 32
-  Total optimization steps = 1,350
+  Total optimization steps = 1,790
+  Instantaneous batch size per device = 1
+  Total train batch size (w. parallel, distributed & accumulation) = 96
+  Gradient Accumulation steps = 32
+  Total optimization steps = 1,790
   Number of trainable parameters = 596,049,920
   Number of trainable parameters = 596,049,920
 ***** Running training *****
   Num examples = 17,182
   Num Epochs = 10
   Instantaneous batch size per device = 1
-  Total train batch size (w. parallel, distributed & accumulation) = 128
+  Total train batch size (w. parallel, distributed & accumulation) = 96
   Gradient Accumulation steps = 32
-  Total optimization steps = 1,350
+  Total optimization steps = 1,790
   Number of trainable parameters = 596,049,920
-***** Running training *****
-  Num examples = 17,182
-  Num Epochs = 10
-  Instantaneous batch size per device = 1
-  Total train batch size (w. parallel, distributed & accumulation) = 128
-  Gradient Accumulation steps = 32
-  Total optimization steps = 1,350
-  Number of trainable parameters = 596,049,920
+2.14666748046875
+loss1: 0.93359375 ----- loss2: 1.0076302289962769 ----- 122 ----- torch.Size([1, 192, 1])
+2.20835542678833
+loss1: 0.6953125 ----- loss2: 0.7396488785743713 ----- 232 ----- torch.Size([1, 326, 1])
+2.568195343017578
+loss1: 0.5859375 ----- loss2: 0.7728992104530334 ----- 545 ----- torch.Size([1, 1078, 1])
+6.453792572021484
+loss1: 0.271484375 ----- loss2: 0.31636589765548706 ----- 583 ----- torch.Size([1, 649, 1])
+6.836795330047607
+loss1: 0.37890625 ----- loss2: 0.5346465110778809 ----- 1342 ----- torch.Size([1, 1414, 1])
+10.767684698104858
+loss1: 0.3515625 ----- loss2: 0.55296790599823 ----- 4774 ----- torch.Size([1, 5230, 1])
+1.160512924194336
+1.1615216732025146
+loss1: 0.484375 ----- loss2: 0.500576376914978 ----- 222 ----- torch.Size([1, 262, 1])
+loss1: 0.6875 ----- loss2: 0.7096222639083862 ----- 164 ----- torch.Size([1, 272, 1])
+1.3478758335113525
+loss1: 0.3046875 ----- loss2: 0.31479009985923767 ----- 478 ----- torch.Size([1, 537, 1])
+1.1721782684326172
+loss1: 0.55078125 ----- loss2: 0.5541457533836365 ----- 225 ----- torch.Size([1, 293, 1])
+1.1747498512268066
+loss1: 0.734375 ----- loss2: 0.7710578441619873 ----- 236 ----- torch.Size([1, 342, 1])
+1.3052890300750732
+loss1: 0.25390625 ----- loss2: 0.2590563893318176 ----- 418 ----- torch.Size([1, 475, 1])
+1.4206950664520264
+loss1: 0.61328125 ----- loss2: 0.670018196105957 ----- 225 ----- torch.Size([1, 313, 1])
+1.4882073402404785
+loss1: 0.3359375 ----- loss2: 0.35354602336883545 ----- 344 ----- torch.Size([1, 416, 1])
+1.6984179019927979
+loss1: 0.29296875 ----- loss2: 0.3516668975353241 ----- 634 ----- torch.Size([1, 679, 1])
+4.540246486663818
+loss1: 0.6875 ----- loss2: 0.733299195766449 ----- 180 ----- torch.Size([1, 253, 1])
+4.643499851226807
+loss1: 0.609375 ----- loss2: 0.6378349661827087 ----- 244 ----- torch.Size([1, 342, 1])
+8.024100542068481
+loss1: 0.361328125 ----- loss2: 0.5447261929512024 ----- 4617 ----- torch.Size([1, 4733, 1])
+3.2457118034362793
+loss1: 1.3515625 ----- loss2: 1.07286536693573 ----- 74 ----- torch.Size([1, 147, 1])
+3.4761295318603516
+loss1: 0.50390625 ----- loss2: 0.5534093379974365 ----- 381 ----- torch.Size([1, 453, 1])
+5.999466896057129
+loss1: 0.388671875 ----- loss2: 0.5700510740280151 ----- 3169 ----- torch.Size([1, 3250, 1])

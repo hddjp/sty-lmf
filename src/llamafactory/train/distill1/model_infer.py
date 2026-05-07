@@ -35,46 +35,46 @@ args = parser.parse_args()
 model = AutoModelForCausalLM.from_pretrained(args.model, torch_dtype=torch.bfloat16, device_map="auto")
 model.eval()
 
-# @app.post("/infer")
-# async def infer(request: Request):
-#     data = await request.json()
-#     t1=time.time()
-#     inputs = {k: torch.tensor(v).to("cuda") for k, v in data.items()}
-#     with torch.no_grad():
-#         output = model(**inputs)
-#     buffer = io.BytesIO()
-#     torch.save(output.logits, buffer)
-#     buffer.seek(0)
-#     t2=time.time()
-#     print(t2-t1)
-#     return Response(content=buffer.read(), media_type="application/octet-stream")
-
 @app.post("/infer")
 async def infer(request: Request):
     data = await request.json()
-    t1 = time.time()
-
+    t1=time.time()
     inputs = {k: torch.tensor(v).to("cuda") for k, v in data.items()}
-
     with torch.no_grad():
         output = model(**inputs)
-
-    logits = output.logits.detach().to("cpu", non_blocking=True)
-
     buffer = io.BytesIO()
-    torch.save(
-        logits,
-        buffer,
-        _use_new_zipfile_serialization=False  # 🔥 关键优化
-    )
+    torch.save(output.logits, buffer)
+    buffer.seek(0)
+    t2=time.time()
+    print(t2-t1)
+    return Response(content=buffer.read(), media_type="application/octet-stream")
 
-    t2 = time.time()
-    print("compute:", t2 - t1)
+# @app.post("/infer")
+# async def infer(request: Request):
+#     data = await request.json()
+#     t1 = time.time()
 
-    return Response(
-        content=buffer.getvalue(),   
-        media_type="application/octet-stream"
-    )
+#     inputs = {k: torch.tensor(v).to("cuda") for k, v in data.items()}
+
+#     with torch.no_grad():
+#         output = model(**inputs)
+
+#     logits = output.logits.detach().to("cpu", non_blocking=True)
+
+#     buffer = io.BytesIO()
+#     torch.save(
+#         logits,
+#         buffer,
+#         _use_new_zipfile_serialization=False  # 🔥 关键优化
+#     )
+
+#     t2 = time.time()
+#     print("compute:", t2 - t1)
+
+#     return Response(
+#         content=buffer.getvalue(),   
+#         media_type="application/octet-stream"
+#     )
 
 
 if __name__ == "__main__":
