@@ -3,7 +3,8 @@
 # ======================== 批量配置（仅需修改这里） ========================
 # 外层循环：需要执行的模型名称列表（根据你的实际模型名修改）
 MODEL_NAMES=(
-    "sft_random"
+    "distill_temp2"
+
 )
 
 
@@ -28,7 +29,7 @@ for MODELNAME in "${MODEL_NAMES[@]}"; do
     --schedule-conservativeness 0.3 \
     --cuda-graph-max-bs 768 \
     --chunked-prefill-size 4096 \
-    --dp 4"
+    --dp 3"
 
     # 定义你要运行的 Python 文件路径（请替换成实际路径）
     PYTHON_SCRIPT="/data/sty/sty-lmf/sglang_inference_fm.py"

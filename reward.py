@@ -165,6 +165,7 @@ def strip_string(string):
     string = remove_boxed(string)
     
     string = string.replace("\n", "")
+    string = string.replace("✅","")
 
     string = string.replace("\\!", "")
 

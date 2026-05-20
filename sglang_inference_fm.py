@@ -78,13 +78,23 @@ async def send_async_request(question, model_path,ds_name):
             {"role": "user", "content": "\nLet's think step by step. Output ONLY the final answer RIGHT after \"####\". For multiple-choice question, output only the single letter option (e.g., #### A). "+question} 
         ]
     elif ds_name == "MMLU":
+        #v1
+        # messages = [
+        #     {"role": "user", "content": "\nLet's think step by step. Output ONLY the final answer RIGHT after \"####\". For multiple-choice question, DO NOT output any content after the letter option (e.g., #### A. 100), output only the single letter option (e.g., #### A)"+question}  
+        # ]
+        #v2
         messages = [
-            {"role": "user", "content": "\nLet's think step by step. Output ONLY the final answer RIGHT after \"####\". For multiple-choice question, output only the single letter option (e.g., #### A), DO NOT output any content after the letter option (e.g., #### A. 100). "+question} 
+             {"role": "user", "content": "\nLet's think step by step. Output the final answer after \"####\". For multiple-choice question, output only the single letter option (e.g., #### A), DO NOT output any content after the letter option (e.g., #### A. 100). "+question} 
         ]
+        
     else:
         messages = [
-            {"role": "user", "content": "\nLet's think step by step. Output ONLY the final answer RIGHT after \"####\", do not include any prefix such as 'final answer:'. For example, #### 100. "+question}#, do not include any prefix such as 'final answer:'. 
+            {"role": "user", "content": "\nLet's think step by step. Output ONLY the final answer RIGHT after \"####\", For example, #### 100. Do not include any prefix such as 'final answer:'. "+question}
         ]
+        #v1
+        #messages = [
+        #     {"role": "user", "content": "\nLet's think step by step. Output the final answer after \"####\""+question}
+        #]
     
     if "AIME" in ds_name or ds_name=="MATH":
         max_len = 20000
@@ -95,7 +105,7 @@ async def send_async_request(question, model_path,ds_name):
         TEMPERATURE=1
         n_samples=8
     else:
-        TEMPERATURE=0
+        TEMPERATURE=1 # 0
         n_samples=1
     
     response = await async_client.chat.completions.create(
@@ -104,7 +114,9 @@ async def send_async_request(question, model_path,ds_name):
         max_tokens=max_len,
         temperature=TEMPERATURE,
         timeout = 200000,
-        n=n_samples
+        n=n_samples,
+        top_p=0.95,
+        frequency_penalty=0.2
     )
     return response
 
@@ -153,15 +165,19 @@ def evaluate_model( model_path,dataset,ds_name):
         
         for chat_response,question,ground_truth in zip(request_results,questions,ground_truths):
             if "AIME" not in ds_name:
-                generated_text = chat_response.choices[0].message.content.strip()
-            
+                generated_text = chat_response.choices[0].message.content
+                if generated_text is None:
+                    generated_text = ''
+                
                 final_answer = extract_solution(generated_text)
                 is_correct = bool(compute_score(generated_text,ground_truth))
                 if is_correct:
                     total_correct += 1
             else:
-                generated_texts = [chat_response.choices[i].message.content.strip() for i in range(len(chat_response.choices))]
+                generated_texts = [chat_response.choices[i].message.content for i in range(len(chat_response.choices))]
                 for generated_text in generated_texts:
+                    if generated_text is None:
+                        generated_text = ''
                     final_answer = extract_solution(generated_text)
                     is_correct = bool(compute_score(generated_text,ground_truth))
                     if is_correct:
@@ -202,8 +218,8 @@ def main():
     #save_path = os.path.join("/data/sty/onff/eval_result/", "lmfsft1")
     os.makedirs(save_path, exist_ok=True)
     
-    all_datasets = ['gsm8k', 'MATH','AIME24', 'AIME25', 'MMLU', 'BBH']
-    #all_datasets = ['gsm8k', 'MATH','AIME24', 'AIME25']
+    #all_datasets = ['gsm8k', 'MATH','AIME24', 'AIME25', 'MMLU', 'BBH']
+    all_datasets = ['MMLU']
     all_acc = {}
     
     for ds in all_datasets:
